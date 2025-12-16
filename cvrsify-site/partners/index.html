@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- CVRSIFY Favicon -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<!-- Google / Social Preview -->
+<meta property="og:image" content="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Partners | Cvrsify</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&display=swap" rel="stylesheet">
+
+<style>
+/* ========================= */
+/* GLOBAL / SCROLL           */
+/* ========================= */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { width: 0; height: 0; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, sans-serif;
+  color: #fff;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,0,0,.12), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,180,.10), transparent 55%),
+    radial-gradient(circle at 60% 90%, rgba(0,210,255,.10), transparent 55%),
+    linear-gradient(180deg, #060611, #02020a 60%, #050510);
+}
+
+/* ========================= */
+/* STICKY NAV                */
+/* ========================= */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background: rgba(6,6,17,.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.nav-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+.nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+}
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: .85;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: .2s ease;
+}
+.nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
+.nav a.active {
+  opacity: 1;
+  background: rgba(255,0,0,.18);
+  box-shadow: 0 0 14px rgba(255,0,0,.25);
+}
+
+/* MOBILE NAVIGATION ADDED/FIXED */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: auto; /* Pushed to the right */
+}
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+}
+.mobile-nav {
+  display: none;
+  background: rgba(10,10,25,.95);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.mobile-nav a {
+  display: block;
+  padding: 14px 24px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+.mobile-nav a.active {
+  background: rgba(255,0,0,.18);
+}
+.mobile-nav.show { display: block; }
+
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .hamburger { display: flex; }
+  .nav-inner { padding: 10px 16px; }
+}
+
+/* HERO */
+.cvr-partners-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 16px 20px;
+  text-align: center;
+  opacity: 0;
+  animation: heroFadeUp 0.9s ease forwards;
+}
+.cvr-partners-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(64px, 11vw, 120px);
+  letter-spacing: 0.06em;
+  margin: 0 0 14px;
+}
+.cvr-partners-sub {
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* PARTNERS GRID */
+.cvr-partners-wrapper {
+  width: 100%;
+  padding: 70px 0 40px;
+  display: flex;
+  justify-content: center;
+}
+.cvr-sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  justify-items: center;
+  max-width: 1100px;
+  width: 100%;
+  padding: 0 12px;
+}
+.cvr-full-row {
+  grid-column: 1 / -1;
+}
+.cvr-sponsor-item {
+  max-width: 340px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.35);
+  transition: 0.22s ease;
+}
+.cvr-sponsor-item:hover { transform: scale(1.045); }
+.cvr-sponsor-item img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* MOBILE PARTNERS GRID FIX */
+@media (max-width: 600px) {
+  .cvr-sponsor-grid {
+    grid-template-columns: 1fr; /* Switch to a single column */
+    gap: 16px; /* Slightly reduce gap for mobile */
+    padding: 0 16px; /* Add side padding */
+  }
+  .cvr-full-row {
+    grid-column: auto; /* Allow full row item to flow normally */
+  }
+  .cvr-sponsor-item {
+    max-width: 100%; /* Ensure all items take full width */
+  }
+}
+
+/* BRAND GLOWS */
+.cvr-gfuel{box-shadow:0 0 20px #6b2cffaa;} .cvr-gfuel:hover{box-shadow:0 0 34px #6b2cff;}
+.cvr-avermedia{box-shadow:0 0 20px #ff0060aa;} .cvr-avermedia:hover{box-shadow:0 0 34px #ff0060;}
+.cvr-noping{box-shadow:0 0 20px #00ff4daa;} .cvr-noping:hover{box-shadow:0 0 34px #00ff4d;}
+.cvr-maono{box-shadow:0 0 20px #ff9900aa;} .cvr-maono:hover{box-shadow:0 0 34px #ff9900;}
+.cvr-gamesir{box-shadow:0 0 20px #0096ffaa;} .cvr-gamesir:hover{box-shadow:0 0 34px #0096ff;}
+.cvr-newegg{box-shadow:0 0 20px #ffaa00aa;} .cvr-newegg:hover{box-shadow:0 0 34px #ffaa00;}
+.cvr-drope{box-shadow:0 0 20px #934dffa0;} .cvr-drope:hover{box-shadow:0 0 34px #934dff;}
+.cvr-razer{box-shadow:0 0 20px #00ff00aa;} .cvr-razer:hover{box-shadow:0 0 34px #00ff00;}
+.cvr-matrix{box-shadow:0 0 20px #00eaffaa;} .cvr-matrix:hover{box-shadow:0 0 34px #00eaff;}
+
+/* FOOTER */
+#cvr-footer-wrapper {
+  width: 100%;
+}
+.cvr-footer {
+  padding: 50px 0 40px;
+  font-family: 'Inter', sans-serif;
+  color: #cfcfcf;
+  display: flex;
+  justify-content: center;
+}
+.cvr-footer-row {
+  width: 90%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cvr-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cvr-footer-left-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cvr-footer-left-top img {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+.cvr-footer-brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+.cvr-footer-copyright {
+  font-size: 13px;
+  opacity: 0.7;
+}
+.cvr-footer-socials {
+  display: flex;
+  gap: 22px;
+}
+.cvr-footer-socials a img {
+  width: 26px;
+  filter: brightness(4) invert(1);
+  transition: 0.25s ease;
+}
+.cvr-footer-socials a.x:hover img { filter: brightness(5) drop-shadow(0 0 8px #fff); }
+.cvr-footer-socials a.kick:hover img { filter: brightness(5) drop-shadow(0 0 8px #53fc18); }
+.cvr-footer-socials a.youtube:hover img { filter: brightness(5) drop-shadow(0 0 8px #ff0000); }
+.cvr-footer-socials a.twitch:hover img { filter: brightness(5) drop-shadow(0 0 8px #9146ff); }
+.cvr-footer-socials a.discord:hover img { filter: brightness(5) drop-shadow(0 0 8px #5865f2); }
+
+@media (max-width: 770px) {
+  .cvr-footer-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .cvr-footer-left {
+    align-items: center; /* Center content when stacked */
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <img class="nav-logo" src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a class="active" href="/partners">Partners</a>
+      <a href="/giveaways">Giveaways</a>
+      <a href="/leaderboards">Leaderboards</a>
+      <a href="/milestones">Milestones</a>
+      <a href="/shop">Shop</a>
+      <a href="/about">About Me</a>
+    </nav>
+    
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  
+  <div id="mobileNav" class="mobile-nav">
+    <a href="/">Home</a>
+    <a class="active" href="/partners">Partners</a>
+    <a href="/giveaways">Giveaways</a>
+    <a href="/leaderboards">Leaderboards</a>
+    <a href="/milestones">Milestones</a>
+    <a href="/shop">Shop</a>
+    <a href="/about">About Me</a>
+  </div>
+</div>
+
+<section class="cvr-partners-hero">
+  <h1 class="cvr-partners-title">PARTNERS</h1>
+  <p class="cvr-partners-sub">Trusted brands I work with 🖤</p>
+</section>
+
+<div class="cvr-partners-wrapper">
+  <div class="cvr-sponsor-grid">
+
+    <a href="https://www.gfuel.com/cvrsify" class="cvr-sponsor-item cvr-gfuel" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/gfuel.png">
+    </a>
+
+    <a href="https://sdqk.me/ys7w9AKn/9f8lj0GW" class="cvr-sponsor-item cvr-avermedia" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/avermedia.png">
+    </a>
+
+    <a href="https://nopi.ng/cvrsify" class="cvr-sponsor-item cvr-noping" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/noping.png">
+    </a>
+
+    <a href="https://www.maono.com/cvrsify" class="cvr-sponsor-item cvr-maono" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/maono.png">
+    </a>
+
+    <a href="https://gamesir.com/discount/Cvrsify" class="cvr-sponsor-item cvr-gamesir" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/gamesir.png">
+    </a>
+
+    <a href="https://click.linksynergy.com/fs-bin/click?id=SZ958i4HWTo&offerid=1207190.251&subid=0&type=4" class="cvr-sponsor-item cvr-newegg" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/newegg.png">
+    </a>
+
+    <a href="https://drope.me/u/cvrsify?referral=true" class="cvr-sponsor-item cvr-drope" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/drope.png">
+    </a>
+
+    <a href="https://razer.a9yw.net/LXvMyj" class="cvr-sponsor-item cvr-razer" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/razer.png">
+    </a>
+
+    <a href="https://matrixkeyboards.com/?ref=cvrsify" class="cvr-sponsor-item cvr-matrix cvr-full-row" target="_blank">
+      <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/sponsors/matrix.png">
+    </a>
+
+  </div>
+</div>
+
+<div id="cvr-footer-wrapper">
+  <div class="cvr-footer">
+    <div class="cvr-footer-row">
+      <div class="cvr-footer-left">
+        <div class="cvr-footer-left-top">
+          <img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+          <div class="cvr-footer-brand">Cvrsify</div>
+        </div>
+        <div class="cvr-footer-copyright">
+          © 2025 Cvrsify. All rights reserved.
+        </div>
+      </div>
+
+      <div class="cvr-footer-socials">
+        <a class="x" href="https://www.x.com/cvrsify" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg"></a>
+        <a class="kick" href="https://www.kick.com/cvrsify" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/kick.svg"></a>
+        <a class="youtube" href="https://www.youtube.com/@cvrsify" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"></a>
+        <a class="twitch" href="https://www.twitch.tv/cvrsify" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg"></a>
+        <a class="discord" href="https://discord.com/invite/kjtWDKu" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* Mobile menu toggle ADDED */
+  function toggleMenu() {
+    document.getElementById("mobileNav").classList.toggle("show");
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leaderboards | Cvrsify</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ========================= */
+/* GLOBAL / BACKGROUND       */
+/* ========================= */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { width: 0; height: 0; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,0,0,.12), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,180,.10), transparent 55%),
+    radial-gradient(circle at 60% 90%, rgba(0,210,255,.10), transparent 55%),
+    linear-gradient(180deg, #060611, #02020a 60%, #050510);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+body.loaded { opacity: 1; }
+
+/* ========================= */
+/* STICKY NAV (MATCH OTHERS) */
+/* ========================= */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background: rgba(6,6,17,.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.nav-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: .85;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: .2s ease;
+}
+.nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
+.nav a.active {
+  opacity: 1;
+  background: rgba(255,0,0,.18);
+  box-shadow: 0 0 14px rgba(255,0,0,.25);
+}
+
+/* Mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+}
+
+.mobile-nav {
+  display: none;
+  background: rgba(10,10,25,.95);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.mobile-nav a {
+  display: block;
+  padding: 14px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+.mobile-nav a.active {
+  background: rgba(255,0,0,.18);
+}
+
+.mobile-nav.show { display: block; }
+
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .hamburger { display: flex; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+
+    <img class="nav-logo"
+      src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png"
+      alt="Cvrsify">
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/partners">Partners</a>
+      <a href="/giveaways">Giveaways</a>
+      <a class="active" href="/leaderboards">Leaderboards</a>
+      <a href="/milestones">Milestones</a>
+      <a href="/shop">Shop</a>
+      <a href="/about">About Me</a>
+    </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+  </div>
+
+  <div id="mobileNav" class="mobile-nav">
+    <a href="/">Home</a>
+    <a href="/partners">Partners</a>
+    <a href="/giveaways">Giveaways</a>
+    <a class="active" href="/leaderboards">Leaderboards</a>
+    <a href="/milestones">Milestones</a>
+    <a href="/shop">Shop</a>
+    <a href="/about">About Me</a>
+  </div>
+</div>
+
+<main style="max-width:1100px;margin:auto;padding:20px 16px 60px;">
+<style>
+/* GENERAL / GOOGLE SITES SAFETY */
+#cvr-wrapper, #cvr-lb, #cvr-top10-list, #cvr96-top10-list {
+  height:auto !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+#cvr-lb { width:100%; box-sizing:border-box; }
+
+/* ==========================================================
+   BETJUICY-STYLE MAIN TITLE (YOUR ORIGINAL)
+   ========================================================== */
+.cvr-title-block {
+  width:900px;
+  max-width:100%;
+  margin:0 auto;
+  text-align:center;
+  padding-top:20px;
+  margin-bottom:20px;
+}
+.cvr-title-top {
+  font-size:42px;
+  font-weight:800;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  background:linear-gradient(180deg,#ff4500 0%,#b82000 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:
+    0 0 12px rgba(255,69,0,0.60),
+    0 0 22px rgba(255,69,0,0.40),
+    0 0 36px rgba(255,69,0,0.32);
+}
+.cvr-title-bottom {
+  font-size:64px;
+  font-weight:900;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:#fff;
+  text-shadow:
+    0 0 8px rgba(255,255,255,0.35),
+    0 0 18px rgba(255,255,255,0.20),
+    0 3px 4px rgba(0,0,0,0.45);
+}
+@media (max-width:600px) {
+  .cvr-title-top { font-size:30px; }
+  .cvr-title-bottom { font-size:44px; }
+}
+.cvr-separator {
+  width:200px;
+  height:2px;
+  background:linear-gradient(90deg,rgba(255,69,0,0),rgba(255,69,0,0.9),rgba(255,69,0,0));
+  margin:15px auto 25px auto;
+  filter:blur(0.5px);
+}
+
+/* SWITCH BUTTON ROW */
+.cvr-switch-row {
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:25px;
+  flex-wrap:wrap;
+}
+.cvr-switch-btn {
+  padding:8px 20px;
+  border-radius:14px;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.18s ease;
+  text-decoration:none !important;
+  user-select:none;
+}
+.cvr-switch-btn.active {
+  background:#ff0000;
+  color:#fff;
+  box-shadow:0 0 10px rgba(255,0,0,0.45);
+}
+.cvr-switch-btn.inactive {
+  background:rgba(255,255,255,0.08);
+  color:#ccc;
+}
+.cvr-btn-96 {
+  background:rgba(0,0,0,0.65);
+  color:#c4c4c4;
+  padding:8px 24px;
+  border-radius:16px;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.06);
+  opacity:0.8;
+}
+.cvr-btn-96:hover { background:rgba(0,0,0,0.8); opacity:0.9; }
+
+/* CTA Button */
+.cvr-info-bar {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:620px;
+  margin:0 auto 30px auto;
+  padding:12px 20px;
+  border-radius:32px;
+  background:linear-gradient(90deg,#ff0000,#c00000);
+  border:1px solid rgba(255,255,255,0.18);
+  text-decoration:none;
+  color:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  transition:transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+.cvr-info-bar:hover {
+  transform:translateY(-2px);
+  filter:brightness(1.08);
+  box-shadow:0 8px 22px rgba(0,0,0,0.55);
+}
+.cvr-info-left { display:flex; align-items:center; gap:14px; }
+.cvr-info-icon { width:40px; height:40px; object-fit:contain; }
+.cvr-info-bold { font-size:14px; font-weight:700; text-transform:uppercase; }
+.cvr-info-small { font-size:12px; opacity:0.85; }
+
+/* TIMER */
+.cvr-timer-box { margin:16px auto 25px auto; text-align:center; }
+.cvr-timer-title { font-size:13px; letter-spacing:0.15em; opacity:0.75; margin-bottom:6px; }
+.cvr-countdown { font-size:22px; font-weight:700; letter-spacing:0.12em; }
+
+/* QUAL MESSAGE */
+.cvr-qual-msg {
+  margin-top:10px;
+  font-size:15px;
+  font-weight:700;
+  line-height:1.4;
+  color:#ffffff;
+  text-shadow: 0 0 6px rgba(255,80,40,0.85), 0 0 14px rgba(255,0,0,0.75);
+}
+
+/* PODIUM */
+.cvr-podium {
+  display:flex;
+  justify-content:center;
+  gap:26px;
+  margin-bottom:32px;
+  flex-wrap:wrap;
+}
+.cvr-card {
+  width:190px;
+  padding:20px 14px;
+  border-radius:18px;
+  background:rgba(6,6,10,0.88);
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.08);
+  box-sizing:border-box;
+}
+.cvr-first { transform:translateY(-16px); }
+.cvr-rank-badge {
+  width:34px; height:34px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700;
+  margin:0 auto 10px auto;
+}
+.gold { background:linear-gradient(135deg,#ffeb3b,#ff9800); color:#111; }
+.silver { background:linear-gradient(135deg,#eee,#bbb); color:#111; }
+.bronze { background:linear-gradient(135deg,#ffcc80,#ff8a65); color:#111; }
+
+/* AVATAR */
+.cvr-avatar {
+  width:56px; height:56px;
+  border-radius:16px;
+  background:#050509;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 8px auto;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,0.18);
+}
+.cvr-avatar img { width:100%; height:100%; object-fit:contain; }
+
+.cvr-user { font-size:16px; font-weight:700; margin-bottom:4px; }
+.cvr-podium-wager { font-size:11px; opacity:0.7; letter-spacing:0.1em; text-transform:uppercase; }
+.cvr-podium-prize { margin-top:12px; padding:8px; border-radius:999px; font-weight:700; }
+.gold-bar { background:linear-gradient(90deg,#ffeb3b,#ff9800); color:#111; }
+.silver-bar { background:linear-gradient(90deg,#eee,#bbb); color:#111; }
+.bronze-bar { background:linear-gradient(90deg,#ffcc80,#ff8a65); color:#111; }
+
+/* TOP 20 */
+.cvr-top20-title {
+  margin-top:35px; margin-bottom:10px;
+  font-size:14px; font-weight:700;
+  letter-spacing:0.22em;
+  opacity:0.8;
+  text-transform:uppercase;
+}
+.cvr-top20-header {
+  position:sticky;
+  top:0;
+  z-index:5;
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) minmax(80px,auto) minmax(80px,auto);
+  padding:4px 6px 12px 6px;
+  color:rgba(255,255,255,0.45);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.11em;
+  text-transform:uppercase;
+  background:rgba(5,5,10,0.97);
+}
+.cvr-top20-header .hdr-left { display:flex; align-items:center; gap:10px; }
+
+.cvr-top-list { display:flex; flex-direction:column; gap:12px; }
+
+.cvr-top-row {
+  background:rgba(20,22,31,0.80);
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.05);
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) minmax(80px,auto) minmax(80px,auto);
+  align-items:center;
+  column-gap:16px;
+  transition:all 0.25s ease;
+}
+.cvr-top-row:hover {
+  transform:translateY(-2px);
+  background:rgba(25,27,39,0.92);
+  box-shadow:0 0 14px rgba(255,0,40,0.25);
+}
+.cvr-top-left { display:flex; align-items:center; gap:14px; }
+.cvr-rank-num { font-size:15px; opacity:0.7; min-width:22px; text-align:center; font-weight:600; }
+
+.cvr-icon-wrap {
+  width:32px; height:32px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #ffb300;
+  display:flex; align-items:center; justify-content:center;
+  background:#111;
+}
+.cvr-icon-wrap img { width:100%; height:100%; object-fit:cover; }
+
+.cvr-username { font-size:15px; font-weight:600; }
+
+.cvr-row-wager { justify-self:end; text-align:right; font-size:15px; color:#b388ff; font-weight:600; }
+.cvr-row-prize { justify-self:end; text-align:right; font-size:15px; font-weight:700; }
+.cvr-row-prize.cvr-nq { color:#ffb347; }
+
+/* PROMO BOX SINGLE (USED IN BOTH TABS) */
+.cvr-promo-box-single {
+  width:100%;
+  display:flex;
+  justify-content:center;
+  margin:20px 0 35px 0;
+}
+.cvr-promo-box-single img {
+  width:100%;
+  max-width:520px;
+  border-radius:16px;
+  transition:0.25s ease-in-out;
+  box-shadow: 0 0 22px rgba(255, 0, 0, 0.35), 0 0 38px rgba(255, 0, 0, 0.55);
+}
+.cvr-promo-box-single img:hover {
+  transform:scale(1.04);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.85), 0 0 55px rgba(255, 0, 0, 1);
+}
+@media (max-width:768px) { .cvr-promo-box-single { margin:15px 0 28px 0; } }
+
+/* ==========================================================
+   TAB TRANSITION WRAP (NEW)
+   ========================================================== */
+.cvr-tabwrap {
+  position: relative;
+}
+.cvr-tabpanel {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .28s ease, transform .28s ease;
+}
+.cvr-tabpanel.is-leaving {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.cvr-tabpanel.is-entering {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.cvr-tabpanel.is-entering.is-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cvr-top10-title {
+  margin-top: 35px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.cvr-top10-header {
+  display: grid;
+  grid-template-columns: minmax(0,1.6fr) minmax(80px,auto) minmax(80px,auto);
+  padding: 4px 6px 12px 6px;
+  color: rgba(255,255,255,0.45);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+/* MOBILE TWEAKS */
+@media (max-width:520px) {
+  .cvr-switch-row { gap:6px; }
+  .cvr-switch-btn { padding:6px 12px; font-size:11px; border-radius:10px; }
+  .cvr-info-bar { max-width:92%; padding:10px 14px; border-radius:26px; }
+  .cvr-podium { flex-direction:column; align-items:center; gap:18px; }
+  .cvr-card { width:90%; max-width:260px; transform:none !important; }
+  .cvr-top-row {
+    grid-template-columns:minmax(0,1.5fr) minmax(70px,auto) minmax(70px,auto);
+    padding:12px 10px; column-gap:8px;
+  }
+  .cvr-username { font-size:13px; }
+  .cvr-row-wager, .cvr-row-prize { font-size:12px; white-space:normal; }
+}
+</style>
+
+<div id="cvr-wrapper" style="display:block; height:auto; overflow:visible;">
+  <div id="cvr-lb" style="font-family:'Inter',sans-serif;color:#fff; max-width:980px; margin:auto;">
+
+    <div class="cvr-title-block">
+      <div class="cvr-title-top" id="cvr-title-top">PACKDRAW</div>
+      <div class="cvr-title-bottom" id="cvr-title-bottom">LEADERBOARD</div>
+    </div>
+    <div class="cvr-separator"></div>
+
+    <div class="cvr-switch-row">
+      <a class="cvr-switch-btn active" data-tab="packdraw">PackDraw</a>
+      <a class="cvr-switch-btn inactive cvr-btn-96" data-tab="casino96">96</a>
+    </div>
+
+    <div class="cvr-tabwrap">
+
+      <div id="cvr-packdraw-section" class="cvr-tabpanel">
+
+        <a href="https://packdraw.com?ref=cvrsify" target="_blank" rel="noopener" class="cvr-info-bar">
+          <div class="cvr-info-left">
+            <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0-removebg-preview.png" class="cvr-info-icon" alt="">
+            <div class="cvr-info-text">
+              <div class="cvr-info-bold">USE CODE "CVRSIFY" ON PACKDRAW</div>
+              <div class="cvr-info-small">Click here to join the leaderboard</div>
+            </div>
+          </div>
+        </a>
+
+        <div class="cvr-promo-box-single">
+          <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/d6a306fa-0883-4662-b5ab-80e0502048e1.png" alt="Cvrsify Bonus Promo">
+        </div>
+
+        <div class="cvr-timer-box">
+          <div class="cvr-timer-title">Leaderboard Ends In</div>
+          <div id="cvr-countdown" class="cvr-countdown">00D : 00H : 00M : 00S</div>
+
+          <div class="cvr-qual-msg">
+            ⭐ Contact <strong>Cvrsify on Discord</strong> to claim any winnings.<br>
+            ⭐ You <strong>MUST be using code CVRSIFY</strong> on PackDraw to qualify.
+          </div>
+        </div>
+
+        <div class="cvr-podium">
+          <div class="cvr-card cvr-second">
+            <div class="cvr-rank-badge silver">2</div>
+            <div class="cvr-avatar">
+              <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0-removebg-preview.png" alt="">
+            </div>
+            <div class="cvr-user">Not******</div>
+            <div class="cvr-podium-wager">$0 WAGERED</div>
+            <div class="cvr-podium-prize silver-bar">$0.00</div>
+          </div>
+
+          <div class="cvr-card cvr-first">
+            <div class="cvr-rank-badge gold">1</div>
+            <div class="cvr-avatar">
+              <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0-removebg-preview.png" alt="">
+            </div>
+            <div class="cvr-user">Jac******</div>
+            <div class="cvr-podium-wager">$0 WAGERED</div>
+            <div class="cvr-podium-prize gold-bar">$0.00</div>
+          </div>
+
+          <div class="cvr-card cvr-third">
+            <div class="cvr-rank-badge bronze">3</div>
+            <div class="cvr-avatar">
+              <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0-removebg-preview.png" alt="">
+            </div>
+            <div class="cvr-user">Kic******</div>
+            <div class="cvr-podium-wager">$0 WAGERED</div>
+            <div class="cvr-podium-prize bronze-bar">$0.00</div>
+          </div>
+        </div>
+
+        <h3 class="cvr-top10-title">TOP 10 PLAYERS</h3>
+
+        <div class="cvr-top20-header">
+          <div class="hdr-left">
+            <span class="hdr-hash">#</span>
+            <span class="hdr-user-label">USER</span>
+          </div>
+          <div class="hdr-wager">WAGERED</div>
+          <div class="hdr-prize">PRIZE</div>
+        </div>
+
+        <div id="cvr-top10-list" class="cvr-top-list"></div>
+      </div>
+
+      <div id="cvr-96-section" class="cvr-tabpanel" style="display:none;">
+
+        <a href="https://record.96.partners/_IftnDdVFDHJBNMcqFlyYf2Nd7ZgqdRLk/1/?lp=96trustedbet.com/?channel_id=600069980"
+           target="_blank" rel="noopener" class="cvr-info-bar">
+          <div class="cvr-info-left">
+            <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0.png" class="cvr-info-icon" alt="">
+            <div class="cvr-info-text">
+              <div class="cvr-info-bold">JOIN 96 CASINO WITH MY LINK</div>
+              <div class="cvr-info-small">Click here to join the 96 leaderboard</div>
+            </div>
+          </div>
+        </a>
+
+        <div class="cvr-promo-box-single">
+          <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/d6a306fa-0883-4662-b5ab-80e0502048e1.png" alt="Cvrsify Bonus Promo">
+        </div>
+
+        <div class="cvr-timer-box">
+          <div class="cvr-timer-title">Leaderboard Ends In</div>
+          <div id="cvr-countdown-96" class="cvr-countdown">00D : 00H : 00M : 00S</div>
+
+          <div class="cvr-qual-msg">
+  <div>⭐ You <strong>MUST sign up using my link</strong> on 96 Casino to qualify.</div>
+  <div>⭐ The data on 96 leaderboard can take up to <strong>24 hours</strong> to update.</div>
+  <div>⭐ Contact <strong>Cvrsify on Discord</strong> to claim any winnings.</div>
+</div>
+</div>
+
+        <div class="cvr-podium">
+          <div class="cvr-card cvr-second">
+            <div class="cvr-rank-badge silver">2</div>
+            <div class="cvr-avatar">
+              <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0.png" alt="">
+            </div>
+            <div class="cvr-user cvr96-user-2">User******</div>
+            <div class="cvr-podium-wager cvr96-wager-2">$0 WAGERED</div>
+            <div class="cvr-podium-prize silver-bar cvr96-prize-2">$0.00</div>
+          </div>
+
+          <div class="cvr-card cvr-first">
+            <div class="cvr-rank-badge gold">1</div>
+            <div class="cvr-avatar">
+              <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0.png" alt="">
+            </div>
+            <div class="cvr-user cvr96-user-1">User******</div>
+            <div class="cvr-podium-wager cvr96-wager-1">$0 WAGERED</div>
+            <div class="cvr-podium-prize gold-bar cvr96-prize-1">$0.00</div>
+          </div>
+
+          <div class="cvr-card cvr-third">
+            <div class="cvr-rank-badge bronze">3</div>
+            <div class="cvr-avatar">
+              <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0.png" alt="">
+            </div>
+            <div class="cvr-user cvr96-user-3">User******</div>
+            <div class="cvr-podium-wager cvr96-wager-3">$0 WAGERED</div>
+            <div class="cvr-podium-prize bronze-bar cvr96-prize-3">$0.00</div>
+          </div>
+        </div>
+
+        <h3 class="cvr-top20-title">TOP 10 PLAYERS</h3>
+
+        <div class="cvr-top20-header">
+          <div class="hdr-left">
+            <span class="hdr-hash">#</span>
+            <span class="hdr-user-label">USER</span>
+          </div>
+          <div class="hdr-wager">WAGERED</div>
+          <div class="hdr-prize">PRIZE</div>
+        </div>
+
+        <div id="cvr96-top10-list" class="cvr-top-list"></div>
+      </div>
+
+    </div></div>
+</div>
+<script>
+/* =========================
+   PAGE FADE-IN (like other pages)
+   ========================= */
+window.addEventListener("load", () => document.body.classList.add("loaded"));
+
+/* =========================
+   PAGE FADE-OUT for INTERNAL links only
+   ========================= */
+document.querySelectorAll("a[href^='/']").forEach(link => {
+  link.addEventListener("click", (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === "_blank") return;
+    e.preventDefault();
+    const href = link.getAttribute("href");
+
+    // close mobile menu
+    const mn = document.getElementById("mobileNav");
+    if (mn) mn.classList.remove("show");
+
+    document.body.classList.remove("loaded");
+    setTimeout(() => { window.location.href = href; }, 250);
+  });
+});
+
+/* =========================
+   NAV: Mobile menu toggle + outside click
+   ========================= */
+function toggleMenu() {
+  const nav = document.getElementById("mobileNav");
+  if (nav) nav.classList.toggle("show");
+}
+document.addEventListener("click", (e) => {
+  const nav = document.getElementById("mobileNav");
+  const ham = document.querySelector(".hamburger");
+  if (!nav || !ham) return;
+  if (!nav.classList.contains("show")) return;
+  if (nav.contains(e.target) || ham.contains(e.target)) return;
+  nav.classList.remove("show");
+});
+
+/* =========================
+   TIMER: first of next month, 00:00 (America/Toronto)
+   ========================= */
+function nextMonthEST() {
+  const now = new Date();
+  const estNow = new Date(now.toLocaleString("en-US",{timeZone:"America/Toronto"}));
+  return new Date(estNow.getFullYear(), estNow.getMonth() + 1, 1, 0, 0, 0);
+}
+
+function updateCountdown() {
+  const end = nextMonthEST();
+  const now = new Date(new Date().toLocaleString("en-US",{timeZone:"America/Toronto"}));
+  const diff = end - now;
+
+  const d = Math.max(0, Math.floor(diff / (1000*60*60*24)));
+  const h = Math.max(0, Math.floor((diff / (1000*60*60)) % 24));
+  const m = Math.max(0, Math.floor((diff / (1000*60)) % 60));
+  const s = Math.max(0, Math.floor((diff / 1000) % 60));
+
+  const el = document.getElementById("cvr-countdown");
+  if (el) el.textContent = `${d}D : ${h}H : ${m}M : ${s}S`;
+
+  const el96 = document.getElementById("cvr-countdown-96");
+  if (el96) el96.textContent = `${d}D : ${h}H : ${m}M : ${s}S`;
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+/* =========================
+   PACKDRAW LEADERBOARD CONFIG
+   ========================= */
+const PACKDRAW_WORKER_URL = "https://packdraw.im-trixzies.workers.dev";
+const PAYOUTS = [40, 25, 20, 10, 5];
+
+const FAKE_NAMES = [
+  "LuckyAce","NightHawk","CryptoKing","VibeStorm","ShadowCat","FireJack",
+  "PulseWave","SpinGoblin","NovaRush","ByteWizard","WagerWolf","ClutchFox",
+  "NeonRider","TiltProof","HighRoller","MysticSpin","RedPhantom","StormByte",
+  "PixelGhost","RogueWave","ZenSpinner","NightSprint","TurboBlaze","CoinBandit"
+];
+
+// --- FIXED FAKE PLAYERS ---
+// Pre-generated fake players with wagers in the 300-2500 range.
+// You can edit these values manually if needed.
+const FIXED_FAKE_PLAYERS = [
+    { name: "LuckyAce",   wager: 2450.50, fake: true },
+    { name: "NightHawk",  wager: 2125.75, fake: true },
+    { name: "CryptoKing", wager: 1890.30, fake: true },
+    { name: "VibeStorm",  wager: 1540.20, fake: true },
+    { name: "ShadowCat",  wager: 1205.10, fake: true },
+    { name: "FireJack",   wager: 980.60,  fake: true },
+    { name: "PulseWave",  wager: 760.40,  fake: true },
+    { name: "SpinGoblin", wager: 530.90,  fake: true },
+    { name: "NovaRush",   wager: 410.15,  fake: true },
+    { name: "ByteWizard", wager: 305.80,  fake: true }
+];
+
+function getMonthlyAfterEST() {
+  const now = new Date();
+  const estNow = new Date(now.toLocaleString("en-US",{timeZone:"America/Toronto"}));
+  const y = estNow.getFullYear();
+  const m = String(estNow.getMonth() + 1).padStart(2,"0");
+  return `${y}-${m}-01`;
+}
+
+function formatMoney(amount) {
+  const n = Number(amount) || 0;
+  return "$" + n.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function maskName(name) {
+  if (!name) return "Unknown";
+  if (name.length <= 3) return name + "***";
+  return name.slice(0,3) + "*".repeat(Math.max(1,name.length - 3));
+}
+function prizeLabel(rank) {
+  if (rank >= 1 && rank <= PAYOUTS.length) {
+    return {
+      text: formatMoney(PAYOUTS[rank - 1]),
+      notQualified: false
+    };
+  }
+  return {
+    text: "$0.00",
+    notQualified: false
+  };
+}
+
+// Function to include all players, even those with $0 wager.
+function normalizePlayers(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .map(item => ({
+      name: item.username || item.user || item.name || "Unknown",
+      wager: Number(item.wagerAmount ?? item.totalWager ?? item.wager ?? 0),
+      fake: false
+    }));
+}
+
+function renderPodium(players) {
+  const cards = document.querySelectorAll("#cvr-packdraw-section .cvr-podium .cvr-card");
+  if (!cards.length) return;
+
+  const first  = players[0];
+  const second = players[1];
+  const third  = players[2];
+
+  const config = [
+    { card:cards[1], rank:1, player:first  },
+    { card:cards[0], rank:2, player:second },
+    { card:cards[2], rank:3, player:third  }
+  ];
+
+  config.forEach(({card,rank,player}) => {
+    // Only update if a player object exists for that rank
+    if (!card || !player) return;
+
+    const badge = card.querySelector(".cvr-rank-badge");
+    if (badge) badge.textContent = rank;
+
+    const userEl = card.querySelector(".cvr-user");
+    if (userEl) userEl.textContent = maskName(player.name);
+
+    const wagerEl = card.querySelector(".cvr-podium-wager");
+    if (wagerEl) wagerEl.textContent = `${formatMoney(player.wager)} WAGERED`;
+
+    const prizeEl = card.querySelector(".cvr-podium-prize");
+    if (prizeEl) {
+      const prize = prizeLabel(rank);
+      prizeEl.textContent = prize.text;
+      prizeEl.classList.toggle("cvr-nq", prize.notQualified);
+    }
+  });
+}
+
+function renderTopList(players) {
+  const container = document.getElementById("cvr-top10-list");
+  if (!container) return;
+  container.innerHTML = "";
+
+  // Show only the first 10 players after sorting
+  players.slice(0,10).forEach((player,index) => {
+    const rank = index + 1;
+    const prize = prizeLabel(rank);
+
+    const row = document.createElement("div");
+    row.className = "cvr-top-row";
+    row.innerHTML = `
+      <div class="cvr-top-left">
+        <div class="cvr-rank-num">${rank}</div>
+        <div class="cvr-icon-wrap">
+          <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0-removebg-preview.png" alt="">
+        </div>
+        <div class="cvr-username">${maskName(player.name)}</div>
+      </div>
+      <div class="cvr-row-wager">${formatMoney(player.wager)}</div>
+      <div class="cvr-row-prize ${prize.notQualified ? "cvr-nq" : ""}">${prize.text}</div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+async function loadPackdrawLeaderboard() {
+  try {
+    const after = getMonthlyAfterEST();
+    const url = `${PACKDRAW_WORKER_URL}?after=${encodeURIComponent(after)}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      console.error("PackDraw Worker error:", res.status);
+      return;
+    }
+    const json = await res.json();
+    const rawList = Array.isArray(json.leaderboard) ? json.leaderboard : [];
+    
+    // 1. Get ALL real players (including $0)
+    let players = normalizePlayers(rawList); 
+
+    // 2. Add the FIXED FAKE PLAYERS to the list.
+    // This ensures fake players are ALWAYS present to "raise the bar".
+    players = players.concat(FIXED_FAKE_PLAYERS);
+
+    // 3. Sort the combined list by wager (highest first)
+    // Real players will float to the top if their wager > fake players.
+    // Low wager real players will drop to the bottom.
+    players.sort((a,b) => b.wager - a.wager);
+
+    // 4. Render the top 10
+    renderPodium(players);
+    renderTopList(players);
+
+
+  } catch (err) {
+    console.error("Error loading PackDraw leaderboard:", err);
+  }
+}
+
+/* =========================
+   96 CASINO MANUAL LEADERBOARD
+   ========================= */
+const LEADERBOARD_96 = [
+  { name:"PlayerOne",  wager:1500.42, prize:40 },
+  { name:"NightFox",   wager:1200.11, prize:25 },
+  { name:"CryptoKid",  wager:900.88,  prize:20 },
+  { name:"ZenWave",    wager:750.55,  prize:10 },
+  { name:"StormRush",  wager:600.33,  prize:5  },
+  { name:"WagerWolf",  wager:520.22,  prize:0  },
+  { name:"LuckyAce",   wager:480.77,  prize:0  },
+  { name:"TiltProof",  wager:430.19,  prize:0  },
+  { name:"MysticSpin", wager:390.61,  prize:0  },
+  { name:"RedPhantom", wager:360.44,  prize:0  }
+];
+
+function render96Podium(players) {
+  if (!players.length) return;
+  const sorted = [...players].sort((a,b)=>b.wager - a.wager);
+  const first  = sorted[0];
+  const second = sorted[1];
+  const third  = sorted[2];
+
+  const u1 = document.querySelector(".cvr96-user-1");
+  const u2 = document.querySelector(".cvr96-user-2");
+  const u3 = document.querySelector(".cvr96-user-3");
+  const w1 = document.querySelector(".cvr96-wager-1");
+  const w2 = document.querySelector(".cvr96-wager-2");
+  const w3 = document.querySelector(".cvr96-wager-3");
+  const p1 = document.querySelector(".cvr96-prize-1");
+  const p2 = document.querySelector(".cvr96-prize-2");
+  const p3 = document.querySelector(".cvr96-prize-3");
+
+  if (u1 && first)  u1.textContent = maskName(first.name);
+  if (w1 && first)  w1.textContent = `${formatMoney(first.wager)} WAGERED`;
+  if (p1 && first)  p1.textContent = formatMoney(first.prize);
+
+  if (u2 && second) u2.textContent = maskName(second.name);
+  if (w2 && second) w2.textContent = `${formatMoney(second.wager)} WAGERED`;
+  if (p2 && second) p2.textContent = formatMoney(second.prize);
+
+  if (u3 && third)  u3.textContent = maskName(third.name);
+  if (w3 && third)  w3.textContent = `${formatMoney(third.wager)} WAGERED`;
+  if (p3 && third)  p3.textContent = formatMoney(third.prize);
+}
+
+function render96TopList(players) {
+  const container = document.getElementById("cvr96-top10-list");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const sorted = [...players].sort((a,b)=>b.wager - a.wager);
+
+  sorted.slice(0,10).forEach((p,i)=>{
+    const row = document.createElement("div");
+    row.className = "cvr-top-row";
+    row.innerHTML = `
+      <div class="cvr-top-left">
+        <div class="cvr-rank-num">${i+1}</div>
+        <div class="cvr-icon-wrap">
+          <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0.png" alt="">
+        </div>
+        <div class="cvr-username">${maskName(p.name)}</div>
+      </div>
+      <div class="cvr-row-wager">${formatMoney(p.wager)}</div>
+      <div class="cvr-row-prize">${formatMoney(p.prize)}</div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+/* =========================
+   TAB SWITCHING + ANIMATED TRANSITION (NEW)
+   ========================= */
+function animateSwap(outEl, inEl, done) {
+  if (!outEl || !inEl) { done?.(); return; }
+
+  outEl.classList.add("is-leaving");
+
+  setTimeout(() => {
+    outEl.style.display = "none";
+    outEl.classList.remove("is-leaving");
+
+    inEl.style.display = "block";
+    inEl.classList.add("is-entering");
+    // force reflow
+    void inEl.offsetHeight;
+    inEl.classList.add("is-ready");
+
+    setTimeout(() => {
+      inEl.classList.remove("is-entering","is-ready");
+      done?.();
+    }, 290);
+  }, 280);
+}
+
+function initCvrTabs() {
+  const titleTop    = document.getElementById("cvr-title-top");
+  const titleBottom = document.getElementById("cvr-title-bottom");
+  const pdSection   = document.getElementById("cvr-packdraw-section");
+  const c96Section  = document.getElementById("cvr-96-section");
+  const buttons     = document.querySelectorAll(".cvr-switch-btn");
+
+  let activeTab = "packdraw";
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tab = btn.dataset.tab;
+      if (!tab || tab === activeTab) return;
+
+      // button styles
+      buttons.forEach(b => { b.classList.remove("active"); b.classList.add("inactive"); });
+      btn.classList.add("active");
+      btn.classList.remove("inactive");
+
+      if (tab === "packdraw") {
+        activeTab = "packdraw";
+        if (titleTop)    titleTop.textContent    = "PACKDRAW";
+        if (titleBottom) titleBottom.textContent = "LEADERBOARD";
+
+        animateSwap(c96Section, pdSection, () => {});
+      } else if (tab === "casino96") {
+        activeTab = "casino96";
+        if (titleTop)    titleTop.textContent    = "96 CASINO";
+        if (titleBottom) titleBottom.textContent = "LEADERBOARD";
+
+        animateSwap(pdSection, c96Section, () => {});
+      }
+    });
+  });
+}
+
+/* =========================
+   INIT
+   ========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  loadPackdrawLeaderboard();
+  render96Podium(LEADERBOARD_96);
+  render96TopList(LEADERBOARD_96);
+  initCvrTabs();
+});
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+html, body { margin: 0 !important; padding: 0 !important; }
+.gs-container, #cvr-footer-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.cvr-footer {
+  width: 100% !important;
+  background: transparent;
+  padding: 50px 0 40px 0;
+  font-family: 'Inter', sans-serif;
+  color: #cfcfcf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.cvr-footer-row {
+  width: 90%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cvr-footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.cvr-footer-left-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cvr-footer-left-top img {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+.cvr-footer-brand { font-size: 18px; font-weight: 600; color: #fff; }
+.cvr-footer-copyright { font-size: 13px; opacity: 0.7; }
+
+.cvr-footer-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.cvr-footer-badge-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.08);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 14px;
+  color: #e6e6e6;
+}
+.cvr-footer-badge .age {
+  background: #b00020;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+.cvr-footer-badge a {
+  color: #bfbfbf;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+.cvr-footer-socials { display: flex; align-items: center; gap: 22px; }
+.cvr-footer-socials a img {
+  width: 26px;
+  opacity: 1;
+  filter: brightness(4) invert(1);
+  transition: 0.25s ease;
+}
+.cvr-footer-socials a.x:hover img { filter: brightness(5) drop-shadow(0 0 8px #ffffff); }
+.cvr-footer-socials a.kick:hover img { filter: brightness(5) drop-shadow(0 0 8px #53fc18); }
+.cvr-footer-socials a.youtube:hover img { filter: brightness(5) drop-shadow(0 0 8px #ff0000); }
+.cvr-footer-socials a.twitch:hover img { filter: brightness(5) drop-shadow(0 0 8px #9146ff); }
+.cvr-footer-socials a.discord:hover img { filter: brightness(5) drop-shadow(0 0 8px #5865f2); }
+
+@media (max-width: 770px) {
+  .cvr-footer-row { flex-direction: column; gap: 20px; }
+}
+</style>
+
+<div id="cvr-footer-wrapper">
+  <div class="cvr-footer">
+    <div class="cvr-footer-row">
+
+      <div class="cvr-footer-left">
+        <div class="cvr-footer-left-top">
+          <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png" alt="Cvrsify logo">
+          <div class="cvr-footer-brand">Cvrsify</div>
+        </div>
+        <div class="cvr-footer-copyright">
+          © 2025 Cvrsify. All rights reserved.
+        </div>
+      </div>
+
+      <div class="cvr-footer-badge">
+        <div class="cvr-footer-badge-box">
+          <div class="age">18+</div>
+          Please Gamble Responsibly
+        </div>
+        <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a>
+      </div>
+
+      <div class="cvr-footer-socials">
+        <a class="x" href="https://www.x.com/cvrsify" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X">
+        </a>
+        <a class="kick" href="https://www.kick.com/cvrsify" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/kick.svg" alt="Kick">
+        </a>
+        <a class="youtube" href="https://www.youtube.com/@cvrsify" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
+        </a>
+        <a class="twitch" href="https://www.twitch.tv/cvrsify" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg" alt="Twitch">
+        </a>
+        <a class="discord" href="https://discord.com/invite/kjtWDKu" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

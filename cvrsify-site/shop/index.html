@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- CVRSIFY Favicon -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<!-- Google / Social Preview -->
+<meta property="og:image" content="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop | Cvrsify</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================= */
+    /* GLOBAL / BACKGROUND       */
+    /* ========================= */
+    html { scrollbar-width: none; }
+    html::-webkit-scrollbar { width: 0; height: 0; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, sans-serif;
+      color: #fff;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,0,0,.12), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(255,0,180,.10), transparent 55%),
+        radial-gradient(circle at 60% 90%, rgba(0,210,255,.10), transparent 55%),
+        linear-gradient(180deg, #060611, #02020a 60%, #050510);
+      /* FADE-IN CSS REMOVED for fastest load time */
+    }
+    /* body.loaded class removed */
+
+    /* ========================= */
+    /* STICKY NAV (EXACT MATCH)  */
+    /* ========================= */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      background: rgba(6,6,17,.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      filter: drop-shadow(0 0 12px #ff0000);
+    }
+
+    .nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 18px;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      opacity: .85;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: .2s ease;
+    }
+    .nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
+    .nav a.active {
+      opacity: 1;
+      background: rgba(255,0,0,.18);
+      box-shadow: 0 0 14px rgba(255,0,0,.25);
+    }
+
+    /* === MOBILE NAVIGATION FIXES START === */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      margin-left: auto; /* Push to the right */
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: #fff;
+    }
+
+    .mobile-nav {
+      display: none;
+      background: rgba(10,10,25,.95);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .mobile-nav a {
+      display: block;
+      padding: 14px 24px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .mobile-nav a.active {
+      background: rgba(255,0,0,.18);
+    }
+
+    .mobile-nav.show { display: block; }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .hamburger { display: flex; }
+      .nav-inner { padding: 10px 16px; }
+    }
+    /* === MOBILE NAVIGATION FIXES END === */
+
+    /* ========================= */
+    /* HERO (KEEP YOUR TEXT)     */
+    /* ========================= */
+    .page-hero {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 48px 16px 34px;
+      text-align: center;
+    }
+
+    .page-hero-inner {
+      max-width: 1100px;
+      animation: heroFadeUp 0.9s ease forwards;
+      opacity: 0;
+    }
+
+    .page-hero-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(64px, 12vw, 120px);
+      letter-spacing: 0.06em;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .page-hero-subtitle {
+      margin-top: 18px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================= */
+    /* STOREFRONT GRID (2/ROW)   */
+    /* ========================= */
+    .storefront-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 12px 40px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+      .storefront-grid { grid-template-columns: 1fr; }
+    }
+
+    .storefront-card,
+    .storefront-card * {
+      text-decoration: none !important;
+      color: #fff !important;
+    }
+
+    .storefront-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.55);
+      border: 2px solid rgba(255,255,255,0.25);
+      transition: 0.25s ease;
+    }
+
+    .storefront-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      pointer-events: none;
+      box-shadow:
+        0 0 8px rgba(255,255,255,0.6),
+        0 0 16px rgba(255,255,255,0.35),
+        0 0 32px rgba(255,255,255,0.25);
+      opacity: 0;
+      transition: 0.3s ease;
+    }
+
+    .storefront-card:hover::before { opacity: 1; }
+    .storefront-card:hover { transform: translateY(-6px) scale(1.02); }
+
+    .storefront-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .storefront-info {
+      padding: 16px;
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .storefront-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .storefront-sub {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    /* ========================= */
+    /* FOOTER (FROM INDEX)       */
+    /* ========================= */
+    #cvr-footer-wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    .cvr-footer {
+      width: 100%;
+      background: transparent;
+      padding: 50px 0 40px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+    .cvr-footer-row {
+      width: 90%;
+      max-width: 1400px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cvr-footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cvr-footer-left-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cvr-footer-left-top img {
+      width: 42px;
+      border-radius: 10px;
+      filter: drop-shadow(0 0 12px red);
+    }
+    .cvr-footer-brand { font-size: 18px; font-weight: 600; }
+    .cvr-footer-copyright { font-size: 13px; opacity: 0.7; }
+    .cvr-footer-socials {
+      display: flex;
+      gap: 22px;
+    }
+    .cvr-footer-socials img {
+      width: 26px;
+      filter: brightness(4) invert(1);
+      transition: .25s;
+    }
+    .cvr-footer-socials a:hover img {
+      filter: brightness(5) drop-shadow(0 0 8px #fff);
+    }
+    
+    /* === FOOTER MOBILE FIXES START === */
+    @media (max-width: 600px) {
+      /* Stack footer elements vertically */
+      .cvr-footer-row {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+      /* Center the logo and text */
+      .cvr-footer-left {
+        align-items: center;
+      }
+      /* Center social icons (optional, but good for symmetry) */
+      .cvr-footer-socials {
+        justify-content: center;
+      }
+    }
+    /* === FOOTER MOBILE FIXES END === */
+  </style>
+</head>
+
+<body>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <img class="nav-logo" src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png">
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/partners">Partners</a>
+      <a href="/giveaways">Giveaways</a>
+      <a href="/leaderboards">Leaderboards</a>
+      <a href="/milestones">Milestones</a>
+      <a class="active" href="/shop">Shop</a>
+      <a href="/about">About Me</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div id="mobileNav" class="mobile-nav">
+    <a href="/">Home</a>
+    <a href="/partners">Partners</a>
+    <a href="/giveaways">Giveaways</a>
+    <a href="/leaderboards">Leaderboards</a>
+    <a href="/milestones">Milestones</a>
+    <a class="active" href="/shop">Shop</a>
+    <a href="/about">About Me</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="page-hero-title">SHOP</h1>
+    <p class="page-hero-subtitle">
+      Shop for the gear you see me using here!<br>
+      Merch coming soon 🖤
+    </p>
+  </div>
+</section>
+
+<div class="storefront-grid">
+  <a href="https://www.amazon.com/shop/cvrsifyy/list/FQBUIIOR65JV" target="_blank" class="storefront-card">
+    <img class="storefront-image" src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/images/storefront/office-decor.jpg">
+    <div class="storefront-info">
+      <div class="storefront-title">My Office Decor</div>
+      <div class="storefront-sub">View Items</div>
+    </div>
+  </a>
+
+  <a href="https://www.amazon.com/shop/cvrsifyy/list/34NERXH5GPI4M" target="_blank" class="storefront-card">
+    <img class="storefront-image" src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/images/storefront/peripherals.jpg">
+    <div class="storefront-info">
+      <div class="storefront-title">Some of my Peripherals</div>
+      <div class="storefront-sub">View Items</div>
+    </div>
+  </a>
+
+  <a href="https://www.amazon.com/shop/cvrsifyy/list/2O8BOJLREG3DN" target="_blank" class="storefront-card">
+    <img class="storefront-image" src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/images/storefront/stream-pc.jpg">
+    <div class="storefront-info">
+      <div class="storefront-title">Streaming PC Parts</div>
+      <div class="storefront-sub">View Items</div>
+    </div>
+  </a>
+
+  <a href="https://www.amazon.com/shop/cvrsifyy/list/FQBUIIOR65JV" target="_blank" class="storefront-card">
+    <img class="storefront-image" src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/images/storefront/gaming-pc.jpg">
+    <div class="storefront-info">
+      <div class="storefront-title">Gaming PC Parts</div>
+      <div class="storefront-sub">View Items</div>
+    </div>
+  </a>
+</div>
+
+<div id="cvr-footer-wrapper">
+  <div class="cvr-footer">
+    <div class="cvr-footer-row">
+      <div class="cvr-footer-left">
+        <div class="cvr-footer-left-top">
+          <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png">
+          <div class="cvr-footer-brand">Cvrsify</div>
+        </div>
+        <div class="cvr-footer-copyright">
+          © 2025 Cvrsify. All rights reserved.
+        </div>
+      </div>
+
+      <div class="cvr-footer-socials">
+        <a href="https://www.x.com/cvrsify" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg"></a>
+        <a href="https://www.kick.com/cvrsify" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/kick.svg"></a>
+        <a href="https://www.youtube.com/@cvrsify" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"></a>
+        <a href="https://www.twitch.tv/cvrsify" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg"></a>
+        <a href="https://discord.com/invite/kjtWDKu" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ADDED JAVASCRIPT FOR MOBILE MENU TOGGLE
+  function toggleMenu() {
+    document.getElementById("mobileNav").classList.toggle("show");
+  }
+  
+  // Fade-in and fade-out logic removed for fastest load/navigation time.
+</script>
+
+</body>
+</html>

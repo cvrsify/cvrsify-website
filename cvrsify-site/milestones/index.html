@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<meta property="og:image" content="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Milestones | Cvrsify</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ========================= */
+/* GLOBAL / BACKGROUND       */
+/* ========================= */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { width: 0; height: 0; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,0,0,.12), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,180,.10), transparent 55%),
+    radial-gradient(circle at 60% 90%, rgba(0,210,255,.10), transparent 55%),
+    linear-gradient(180deg, #060611, #02020a 60%, #050510);
+  /* Page fade-out/in CSS removed here */
+}
+
+/* ========================= */
+/* STICKY NAV (MATCH OTHERS) */
+/* ========================= */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background: rgba(6,6,17,.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+
+.nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: .85;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: .2s ease;
+}
+.nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
+.nav a.active {
+  opacity: 1;
+  background: rgba(255,0,0,.18);
+  box-shadow: 0 0 14px rgba(255,0,0,.25);
+}
+
+/* Mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+}
+
+.mobile-nav {
+  display: none;
+  background: rgba(10,10,25,.95);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.mobile-nav a {
+  display: block;
+  padding: 14px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+.mobile-nav a.active {
+  background: rgba(255,0,0,.18);
+}
+
+.mobile-nav.show { display: block; }
+
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .hamburger { display: flex; margin-left: auto; }
+}
+
+/* Tab Transition Animations (Only for PackDraw/96 switch) */
+.is-leaving {
+  animation: cvrFadeOut .3s ease-in both;
+}
+.is-entering {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.is-ready {
+  animation: cvrFadeUp .4s ease-out both;
+}
+@keyframes cvrFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cvrFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-14px); }
+}
+
+/* FOOTER STYLES (from Leaderboards.html) */
+#cvr-footer-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 18px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.cvr-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.cvr-footer-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cvr-footer-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+.cvr-footer-brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+.cvr-footer-copyright {
+  font-size: 13px;
+  opacity: 0.7;
+}
+.cvr-footer-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.cvr-footer-badge-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 14px;
+  color: #e6e6e6;
+}
+.cvr-footer-badge .age {
+  background: #b00020;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+.cvr-footer-badge a {
+  color: #bfbfbf;
+  font-size: 13px;
+  text-decoration: underline;
+}
+.cvr-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cvr-footer-socials a {
+  display: block;
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.cvr-footer-socials a:hover {
+  opacity: 1;
+}
+.cvr-footer-socials img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: invert(1);
+}
+/* Ensure logo/copyright are on the same line if space allows */
+@media (min-width: 1000px) {
+  .cvr-footer-content {
+    gap: 20px;
+  }
+}
+@media (max-width: 580px) {
+  .cvr-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .cvr-footer-content {
+    flex-direction: column;
+  }
+  .cvr-footer-socials {
+    order: 3;
+    margin-top: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+
+    <img class="nav-logo"
+      src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png"
+      alt="Cvrsify">
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/partners">Partners</a>
+      <a href="/giveaways">Giveaways</a>
+      <a href="/leaderboards">Leaderboards</a>
+      <a class="active" href="/milestones">Milestones</a>
+      <a href="/shop">Shop</a>
+      <a href="/about">About Me</a>
+    </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+  </div>
+
+  <div id="mobileNav" class="mobile-nav">
+    <a href="/">Home</a>
+    <a href="/partners">Partners</a>
+    <a href="/giveaways">Giveaways</a>
+    <a href="/leaderboards">Leaderboards</a>
+    <a class="active" href="/milestones">Milestones</a>
+    <a href="/shop">Shop</a>
+    <a href="/about">About Me</a>
+  </div>
+</div>
+
+<main style="max-width:1100px;margin:auto;padding:20px 16px 60px;">
+
+<style>
+/* GENERAL / GOOGLE SITES SAFETY */
+#cvr-milestones-wrapper {
+  height:auto !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+/* Title block animation from Leaderboards.html */
+.cvr-title-block {
+  width:900px;
+  max-width:100%;
+  margin:0 auto;
+  text-align:center;
+  padding-top:20px;
+  margin-bottom:20px;
+  /* ADDED ANIMATION */
+  animation: cvrFadeUp .8s ease-out both;
+}
+/* Separator style and animation from Leaderboards.html */
+.cvr-separator {
+  width:200px;
+  height:2px;
+  background:linear-gradient(90deg,rgba(255,69,0,0),rgba(255,69,0,0.9),rgba(255,69,0,0));
+  margin:15px auto 25px auto;
+  filter:blur(0.5px);
+  /* ADDED ANIMATION DELAY */
+  animation: cvrFadeUp .8s ease-out both;
+  animation-delay: .1s;
+}
+
+/* TITLE (MATCHES LEADERBOARD) */
+.cvr-title-top {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ff4500 0%, #b82000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 12px rgba(255, 69, 0, 0.6),
+    0 0 22px rgba(255, 69, 0, 0.4), 0 0 36px rgba(255, 69, 0, 0.32);
+}
+
+.cvr-title-bottom {
+  font-size: 64px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.35),
+    0 0 18px rgba(255, 255, 255, 0.2), 0 3px 4px rgba(0, 0, 0, 0.45);
+}
+@media (max-width:600px) {
+  .cvr-title-top { font-size:30px; }
+  .cvr-title-bottom { font-size:44px; }
+}
+
+
+/* TAB SWITCH BUTTONS */
+.cvr-switch-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  /* ADDED ANIMATION DELAY from Leaderboards.html */
+  animation: cvrFadeUp .8s ease-out both;
+  animation-delay: .2s;
+}
+.cvr-switch-btn {
+  padding: 10px 26px;
+  border-radius: 14px;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-decoration: none !important;
+}
+
+.cvr-switch-btn.active {
+  background: #ff0000;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+}
+
+.cvr-switch-btn.inactive {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ccc;
+}
+
+/* CTA BARS */
+.cvr-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto 30px auto;
+  padding: 12px 20px;
+  border-radius: 32px;
+  background: linear-gradient(90deg, #ff0000, #c00000);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.cvr-info-bar:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
+}
+
+.cvr-info-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cvr-info-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  background: transparent;
+}
+
+.cvr-info-bold {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.cvr-info-small {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* CVRSIFY RED BONUS PROMO (STANDALONE) */
+.cvr-promo-box-single {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 35px 0;
+}
+
+.cvr-promo-box-single img {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 16px;
+    transition: 0.25s ease-in-out;
+    box-shadow:
+        0 0 22px rgba(255, 0, 0, 0.35),
+        0 0 38px rgba(255, 0, 0, 0.55);
+}
+
+.cvr-promo-box-single img:hover {
+    transform: scale(1.04);
+    box-shadow:
+        0 0 30px rgba(255, 0, 0, 0.85),
+        0 0 55px rgba(255, 0, 0, 1);
+}
+
+@media (max-width: 768px) {
+    .cvr-promo-box-single {
+        margin: 15px 0 28px 0;
+    }
+}
+
+/* SHARED MILESTONE STYLES */
+:root {
+  --cvr-red1: #d80000;
+  --cvr-red2: #a80000;
+  --cvr-border: rgba(255, 255, 255, 0.08);
+  --cvr-gold: #ffcc33;
+  --cvr-text-muted: #a6accd;
+}
+
+.milestone-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.milestone-title {
+  font-size: 38px;
+  font-weight: 800;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(255, 120, 60, 0.8), 0 0 28px rgba(255, 0, 0, 0.7);
+  margin: 0 0 6px;
+}
+
+.milestone-subtitle {
+  font-size: 15px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+/* TABS CONTENT WRAPPERS */
+.milestone-tab-content {
+    /* Added for animation target */
+    display: block; 
+}
+.milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* INDIVIDUAL CARD */
+.milestone-card {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 20, 0.98),
+    rgba(6, 6, 10, 0.95)
+  );
+  border-radius: 18px;
+  border: 1px solid var(--cvr-border);
+  padding: 18px 20px;
+  box-shadow: 0 0 16px rgba(255, 0, 0, 0.35), 0 0 36px rgba(0, 0, 0, 0.85);
+  /* Added individual card fade-up animation */
+  animation: cvrFadeUp .8s ease-out both; 
+}
+
+.milestone-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tier-pill {
+  background: linear-gradient(135deg, var(--cvr-red1), var(--cvr-red2));
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+.milestone-wager-label,
+.reward-label {
+  font-size: 13px;
+  color: var(--cvr-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 2px;
+}
+
+.milestone-wager-amount {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.reward-amount {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--cvr-gold);
+  text-shadow: 0 0 14px rgba(255, 170, 0, 0.7);
+  margin-bottom: 10px;
+}
+
+.claim-btn {
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: 0.2s ease;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.btn-active {
+  background: linear-gradient(90deg, #ff0000, #c00000);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(255, 0, 0, 0.5);
+}
+.btn-active:hover {
+  filter: brightness(1.1);
+}
+
+.btn-disabled {
+  background: rgba(255, 255, 255, 0.08);
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 20000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.modal {
+  background: #0d0d18;
+  padding: 24px;
+  border-radius: 20px;
+  max-width: 450px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(255, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: modalSlideUp 0.3s ease-out forwards;
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #ff4500;
+  text-shadow: 0 0 8px rgba(255, 69, 0, 0.6);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.modal-close:hover {
+  opacity: 1;
+}
+
+.modal-trophy {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.modal-claiming {
+  text-align: center;
+  color: #e5e7eb;
+  margin-bottom: 18px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.modal-amounts {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.modal-wager {
+  color: #60a5fa;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.modal-between {
+  color: #e5e7eb;
+}
+
+.modal-reward {
+  color: var(--cvr-gold);
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.modal-terms {
+  background: rgba(15, 23, 42, 0.98);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  color: #f9fafb;
+}
+
+.modal-terms-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.modal-terms ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.modal-terms li {
+  margin-bottom: 4px;
+  color: #e5e7eb;
+}
+
+.modal-discord-btn {
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 999px;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background: #5865f2;
+  color: #fff;
+  box-shadow: 0 0 14px rgba(88, 101, 242, 0.9),
+    0 0 26px rgba(37, 99, 235, 0.9);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+}
+.modal-discord-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 18px rgba(88, 101, 242, 1),
+    0 0 30px rgba(37, 99, 235, 1);
+}
+.modal-discord-circle {
+  font-size: 18px;
+}
+
+.modal-footer-text {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 10px;
+}
+</style>
+
+<div
+  id="cvr-milestones-wrapper"
+  style="
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    max-width: 1100px;
+    margin: auto;
+  "
+>
+  <div class="cvr-title-block">
+    <div class="cvr-title-top" id="cvr-title-top">PACKDRAW</div>
+    <div class="cvr-title-bottom" id="cvr-title-bottom">MILESTONES</div>
+  </div>
+  <div class="cvr-separator"></div>
+
+  <div class="cvr-switch-row">
+    <a class="cvr-switch-btn active" data-tab="packdraw">PackDraw</a>
+    <a class="cvr-switch-btn inactive" data-tab="casino96">96</a>
+  </div>
+
+  <a
+    href="https://packdraw.com?ref=cvrsify"
+    target="_blank"
+    class="cvr-info-bar"
+    id="cta-packdraw"
+  >
+    <div class="cvr-info-left">
+      <img
+        src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/0x0-removebg-preview.png"
+        class="cvr-info-icon"
+        alt="PackDraw"
+      />
+      <div>
+        <div class="cvr-info-bold">Use Code "CVRSIFY" on PackDraw</div>
+        <div class="cvr-info-small">Click here to join and gain rewards</div>
+      </div>
+    </div>
+  </a>
+
+  <a
+    href="https://record.96.partners/_IftnDdVFDHJBNMcqFlyYf2Nd7ZgqdRLk/1/?lp=96trustedbet.com/?channel_id=600069980"
+    target="_blank"
+    class="cvr-info-bar"
+    id="cta-96"
+    style="display: none"
+  >
+    <div class="cvr-info-left">
+      <img
+        src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/0x0.png"
+        class="cvr-info-icon"
+        alt="96 Casino"
+      />
+      <div>
+        <div class="cvr-info-bold">Join 96 Casino With My Link</div>
+        <div class="cvr-info-small">
+          Click here to join and gain rewards
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <div class="cvr-promo-box-single">
+    <img 
+      src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/d6a306fa-0883-4662-b5ab-80e0502048e1.png"
+      alt="Cvrsify Bonus Promo"
+    >
+  </div>
+
+  <div id="packdraw-section" class="milestone-tab-content">
+    <div class="milestone-header">
+      <div class="milestone-title">Rules</div>
+      <div class="milestone-subtitle">
+        Deposit & Wager on PackDraw using code CVRSIFY and<br>
+        unlock cash rewards as you climb through each tier!<br>
+        Once you hit a milestone, click Claim Reward<br>
+        and our staff will verify your wager in Discord.
+      </div>
+    </div>
+    <div class="milestone-grid" id="packdraw-grid">
+      </div>
+  </div>
+
+  <div
+    id="casino96-section"
+    class="milestone-tab-content"
+    style="display: none"
+  >
+    <div class="milestone-header">
+      <div class="milestone-title">Rules</div>
+      <div class="milestone-subtitle">
+        Deposit & Wager on 96 Casino after signing up with my link<br>
+        to unlock cash rewards as you climb each tier. Once you hit a milestone,<br>
+        click Claim Reward and our staff will verify your wager in Discord.
+      </div>
+    </div>
+    <div class="milestone-grid" id="casino96-grid">
+      </div>
+  </div>
+
+  <div class="modal-overlay" id="milestone-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">Claim Reward</div>
+        <button class="modal-close" id="modal-close" aria-label="Close modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-trophy">🏆</div>
+      <div class="modal-claiming">
+        You're claiming: <span id="modal-tier-label">Tier 1</span>
+      </div>
+      <div class="modal-amounts">
+        <span class="modal-wager" id="modal-wager">$0</span>
+        <span class="modal-between"> milestone reward of </span>
+        <span class="modal-reward" id="modal-reward">$0</span>
+      </div>
+      <div class="modal-terms">
+        <div class="modal-terms-title">By claiming this reward, you confirm:</div>
+        <ul>
+          <li id="modal-term1">
+            </li>
+          <li id="modal-term2">
+            </li>
+          <li>You're not multi-accounting or abusing the system.</li>
+        </ul>
+      </div>
+      <a
+        href="https://discord.gg/kjtWDKu"
+        class="modal-discord-btn"
+        target="_blank"
+      >
+        <span class="modal-discord-circle">💬</span>
+        <span>Join Discord to Claim</span>
+      </a>
+      <div class="modal-footer-text">
+        Our staff will verify your wager and milestone progress directly in Discord.
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<div id="cvr-footer-wrapper">
+  <div class="cvr-footer">
+    <div class="cvr-footer-content">
+      <img class="cvr-footer-logo" src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png" alt="Cvrsify">
+      <div class="cvr-footer-brand">Cvrsify</div>
+      <div class="cvr-footer-copyright">© 2025 Cvrsify. All rights reserved.</div>
+    </div>
+
+    <div class="cvr-footer-badge">
+      <div class="cvr-footer-badge-box">
+        <div class="age">18+</div>
+        Please Gamble Responsibly
+      </div>
+      <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a>
+    </div>
+
+    <div class="cvr-footer-socials">
+      <a class="x" href="https://www.x.com/cvrsify" target="_blank" rel="noopener">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X">
+      </a>
+      <a class="kick" href="https://www.kick.com/cvrsify" target="_blank" rel="noopener">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/kick.svg" alt="Kick">
+      </a>
+      <a class="youtube" href="https://www.youtube.com/@cvrsify" target="_blank" rel="noopener">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
+      </a>
+      <a class="twitch" href="https://www.twitch.tv/cvrsify" target="_blank" rel="noopener">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg" alt="Twitch">
+      </a>
+      <a class="discord" href="https://discord.com/invite/kjtWDKu" target="_blank" rel="noopener">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+      </a>
+      <a class="telegram" href="https://t.me/cvrsify" target="_blank" rel="noopener">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram">
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Toggle mobile menu
+function toggleMenu() {
+  const mobileNav = document.getElementById("mobileNav");
+  mobileNav.classList.toggle("show");
+}
+
+/* ======================================= */
+/* ⭐ JS: TABS + MILESTONES + MODAL ⭐ */
+/* ======================================= */
+(function () {
+  const titleTop = document.getElementById("cvr-title-top");
+  const pdSection = document.getElementById("packdraw-section");
+  const c96Section = document.getElementById("casino96-section");
+  const ctaPD = document.getElementById("cta-packdraw");
+  const cta96 = document.getElementById("cta-96");
+
+  const modalOverlay = document.getElementById("milestone-modal");
+  const modalClose = document.getElementById("modal-close");
+  const modalWager = document.getElementById("modal-wager");
+  const modalReward = document.getElementById("modal-reward");
+  const modalTierLabel = document.getElementById("modal-tier-label");
+  const modalTerm1El = document.getElementById("modal-term1");
+  const modalTerm2El = document.getElementById("modal-term2");
+
+  /* ---------- Shared milestone config for BOTH sites ---------- */
+  const MILESTONES = [
+    { tier: 1, wager: "$500", reward: "$5" },
+    { tier: 2, wager: "$1,000", reward: "$10" },
+    { tier: 3, wager: "$2,500", reward: "$20" },
+    { tier: 4, wager: "$5,000", reward: "$40" },
+    { tier: 5, wager: "$10,000", reward: "$75" },
+    { tier: 6, wager: "$25,000", reward: "$150" },
+    { tier: 7, wager: "$50,000", reward: "$250" },
+    { tier: 8, wager: "$100,000", reward: "$500" },
+    { tier: 9, wager: "$250,000", reward: "$1,250" },
+    { tier: 10, wager: "$500,000", reward: "$2,500" },
+  ];
+
+  function createMilestoneCard(milestone, site) {
+    const card = document.createElement("div");
+    card.className = "milestone-card";
+    // Added staggered delay for individual card fade-in
+    card.style.animationDelay = `${milestone.tier * 0.05 + 0.3}s`; 
+
+    card.innerHTML = `
+      <div class="milestone-top">
+        <div class="tier-pill">Tier ${milestone.tier}</div>
+        <div class="reward-label">Reward:</div>
+      </div>
+      <div class="milestone-wager-label">Wager Goal:</div>
+      <div class="milestone-wager-amount">${milestone.wager}</div>
+      <div class="reward-amount">${milestone.reward}</div>
+      <div
+        class="claim-btn btn-active"
+        data-tier="${milestone.tier}"
+        data-wager="${milestone.wager}"
+        data-reward="${milestone.reward}"
+        data-site="${site}"
+      >
+        Claim Reward
+      </div>
+    `;
+    card.querySelector(".claim-btn").addEventListener("click", openModal);
+    return card;
+  }
+
+  function renderMilestones() {
+    const pdGrid = document.getElementById("packdraw-grid");
+    const c96Grid = document.getElementById("casino96-grid");
+    if (pdGrid) {
+      pdGrid.innerHTML = "";
+      MILESTONES.forEach((m) => pdGrid.appendChild(createMilestoneCard(m, "packdraw")));
+    }
+    if (c96Grid) {
+      c96Grid.innerHTML = "";
+      MILESTONES.forEach((m) => c96Grid.appendChild(createMilestoneCard(m, "casino96")));
+    }
+  }
+
+  // Call render once on load
+  renderMilestones();
+
+
+  /* ---------- Modal Logic ---------- */
+  function openModal(e) {
+    const btn = e.currentTarget;
+    const tier = btn.dataset.tier;
+    const wager = btn.dataset.wager;
+    const reward = btn.dataset.reward;
+    const site = btn.dataset.site;
+
+    modalWager.textContent = wager;
+    modalReward.textContent = reward;
+    modalTierLabel.textContent = `Tier ${tier}`;
+
+    if (site === "packdraw") {
+      modalTerm1El.innerHTML = "You're using code CVRSIFY on PackDraw when Depositing & Wagering (this is required to qualify).";
+      modalTerm2El.innerHTML = "You've wagered at least the milestone amount shown above on PackDraw.";
+    } else {
+      modalTerm1El.innerHTML = "You're signed up using my 96 Casino link while Deposting & Wagering (this is required to qualify).";
+      modalTerm2El.innerHTML = "You've wagered at least the milestone amount shown above on 96 Casino.";
+    }
+
+    modalOverlay.classList.add("open");
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove("open");
+  }
+
+  if (modalClose) {
+    modalClose.addEventListener("click", closeModal);
+  }
+
+  if (modalOverlay) {
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+
+  /* ---------- Tab Switch Logic - ANIMATED SWAP ---------- */
+
+  // Animation utility function for fading out/in content
+  function animateSwap(outEl, inEl, done) {
+    if (outEl) {
+      outEl.classList.add("is-leaving"); // Trigger fade-out animation
+      outEl.classList.remove("is-ready");
+    }
+    if (inEl) {
+      inEl.style.display = "block";
+      inEl.classList.add("is-entering"); // Initial state for fade-in
+      inEl.classList.remove("is-leaving");
+    }
+
+    setTimeout(() => {
+      if (outEl) outEl.style.display = "none";
+      if (inEl) {
+        inEl.classList.remove("is-entering");
+        inEl.classList.add("is-ready"); // Trigger fade-in animation
+      }
+      done?.();
+    }, 300); // Wait for the .3s cvrFadeOut animation to finish
+  }
+
+
+  function initTabs() {
+    const buttons = document.querySelectorAll(".cvr-switch-btn");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (btn.classList.contains("active")) return;
+
+        const tab = btn.dataset.tab;
+        let sectionToHide = tab === "packdraw" ? c96Section : pdSection;
+        let sectionToShow = tab === "packdraw" ? pdSection : c96Section;
+        let ctaToHide = tab === "packdraw" ? cta96 : ctaPD;
+        let ctaToShow = tab === "packdraw" ? ctaPD : cta96;
+
+        // 1. Update Buttons
+        buttons.forEach((b) => {
+          b.classList.remove("active");
+          b.classList.add("inactive");
+        });
+        btn.classList.add("active");
+        btn.classList.remove("inactive");
+
+        // 2. Update Title
+        if (titleTop) {
+          titleTop.textContent = tab === "packdraw" ? "PACKDRAW" : "96 CASINO";
+        }
+
+        // 3. Update CTAs (Need to hide/show within the delay window, so keep this direct)
+        if (ctaToHide) ctaToHide.style.display = "none";
+        if (ctaToShow) ctaToShow.style.display = "flex";
+
+        // 4. Animate Section Swap
+        animateSwap(sectionToHide, sectionToShow);
+      });
+    });
+  }
+
+  initTabs();
+})();
+
+// Full-page fade-in on load and fade-out on navigation removed from here
+</script>

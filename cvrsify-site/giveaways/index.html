@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- CVRSIFY Favicon -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<!-- Google / Social Preview -->
+<meta property="og:image" content="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giveaways | Cvrsify</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================= */
+    /* GLOBAL / BACKGROUND       */
+    /* ========================= */
+    html { scrollbar-width: none; }
+    html::-webkit-scrollbar { width: 0; height: 0; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, sans-serif;
+      color: #fff;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,0,0,.12), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(255,0,180,.10), transparent 55%),
+        radial-gradient(circle at 60% 90%, rgba(0,210,255,.10), transparent 55%),
+        linear-gradient(180deg, #060611, #02020a 60%, #050510);
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+    body.loaded { opacity: 1; }
+
+    :root { --wrap: 1100px; }
+
+    /* ========================= */
+    /* PAGE HERO – MATCH PARTNERS */
+    /* ========================= */
+    .page-hero {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 48px 16px 34px;
+      text-align: center;
+    }
+
+    .page-hero-inner {
+      max-width: 1100px;
+      animation: heroFadeUp 0.9s ease forwards;
+      opacity: 0;
+    }
+
+    .page-hero-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(64px, 12vw, 120px);
+      letter-spacing: 0.06em;
+      margin: 0;
+      line-height: 1;
+      color: #ffffff;
+    }
+
+    .page-hero-subtitle {
+      margin-top: 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #ffffff;
+    }
+
+    /* Fade-up animation (same feel as Partners) */
+    @keyframes heroFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========================= */
+    /* STICKY NAV (MATCH OTHERS) */
+    /* ========================= */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      background: rgba(6,6,17,.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      filter: drop-shadow(0 0 12px #ff0000);
+    }
+
+    .nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 18px;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      opacity: .85;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: .2s ease;
+    }
+    .nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
+    .nav a.active {
+      opacity: 1;
+      background: rgba(255,0,0,.18);
+      box-shadow: 0 0 14px rgba(255,0,0,.25);
+    }
+
+    /* Mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px; /* Added padding for a larger touch target */
+      margin-right: -8px; /* Compensate for the new padding on the right */
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: #fff;
+    }
+
+    .mobile-nav {
+      display: none;
+      background: rgba(10,10,25,.95);
+      border-top: 1px solid rgba(255,255,255,.08);
+      position: absolute; /* Added to make sure it covers content correctly */
+      width: 100%;
+      box-sizing: border-box;
+      z-index: 9999;
+    }
+    .mobile-nav a {
+      display: block;
+      padding: 14px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .mobile-nav a.active {
+      background: rgba(255,0,0,.18);
+    }
+
+    .mobile-nav.show { display: block; }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .hamburger { display: flex; margin-left: auto; }
+    }
+
+    /* ========================= */
+    /* PAGE WRAPPER              */
+    /* ========================= */
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 10px 18px 50px;
+    }
+
+    /* ========================= */
+    /* TOP PROMOS                */
+    /* ========================= */
+    .cvr-promo-top {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 18px 0 40px 0;
+      flex-wrap: wrap;
+    }
+    .cvr-promo-box img {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 16px;
+      transition: 0.25s ease-in-out;
+      box-shadow:
+        0 0 22px rgba(255, 0, 0, 0.35),
+        0 0 38px rgba(255, 0, 0, 0.55);
+      display: block;
+    }
+    /* hover only feels right when it's a link, but safe for both */
+    .cvr-promo-box:hover img {
+      transform: scale(1.04);
+      box-shadow:
+        0 0 30px rgba(255, 0, 0, 0.85),
+        0 0 55px rgba(255, 0, 0, 1);
+    }
+    @media (max-width: 768px) {
+      .cvr-promo-top { flex-direction: column; align-items: center; gap: 22px; }
+    }
+
+    /* ========================= */
+    /* FEATURE CARDS (FULL)      */
+    /* ========================= */
+    .cvr-feature-section {
+      padding: 10px 0 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .cvr-feature-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 26px;
+      justify-content: center;
+      max-width: 1100px;
+      width: 100%;
+    }
+    .cvr-feature-card {
+      position: relative;
+      width: 340px;
+      height: 190px;
+      border-radius: 24px;
+      padding: 0;
+      text-decoration: none;
+      background: radial-gradient(circle at 10% 0%, #1a1035 0%, #050616 55%, #110b26 100%);
+      box-shadow:
+        0 0 0 1px rgba(112, 99, 255, 0.2),
+        0 0 40px rgba(81, 0, 255, 0.55),
+        0 0 120px rgba(0, 214, 255, 0.45);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 800px;
+      border: 1px solid rgba(255,255,255,0.05);
+      color: #fff;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cvr-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-sizing: border-box;
+      color: #ffffff;
+      font-family: "Inter", sans-serif;
+      animation: cvrFloat 4.2s ease-in-out infinite;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .cvr-icon-wrap {
+      width: 120px !important;
+      height: 120px !important;
+      flex-shrink: 0;
+      transform: translateZ(35px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cvr-icon {
+      width: 105px !important;
+      opacity: 0.95;
+      filter: drop-shadow(0 0 14px rgba(0,0,0,0.6))
+              drop-shadow(0 0 16px rgba(142,117,255,0.75));
+    }
+    .cvr-text-wrap {
+      transform: translateZ(40px);
+      margin-left: -40px !important;
+      max-width: 200px !important;
+    }
+    .cvr-label {
+      font-size: 18px !important;
+      font-weight: 800;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      text-shadow: 0 0 8px rgba(255,255,255,0.45);
+    }
+    .cvr-sub {
+      font-size: 13px !important;
+      line-height: 1.2em !important;
+      opacity: 0.9;
+      color: #c7d2ff;
+    }
+
+    .cvr-orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(16px);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 130px; height: 130px;
+      background: radial-gradient(circle,#7b5bff,transparent);
+      top: -25px; left: -40px;
+      animation: orbDrift1 9s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 90px; height: 90px;
+      background: radial-gradient(circle,#00d9ff,transparent);
+      bottom: -25px; right: -10px;
+      animation: orbDrift2 10s ease-in-out infinite;
+    }
+
+    .cvr-feature-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.22) 40%, rgba(255,255,255,0) 70%);
+      transform: translateX(-160%) rotate(8deg);
+      animation: shineSweep 7s ease-in-out infinite;
+    }
+    .cvr-feature-card:hover {
+      box-shadow:
+        0 0 0 1px rgba(187,177,255,0.6),
+        0 0 55px rgba(112,90,255,0.95),
+        0 0 150px rgba(0,214,255,0.75);
+    }
+    .cvr-feature-card:hover .cvr-card-inner { animation-duration: 2.6s; }
+    .cvr-feature-card:active { transform: scale(0.985); }
+
+    @keyframes cvrFloat { 0%{transform:translateY(0)} 50%{transform:translateY(-10px)} 100%{transform:translateY(0)} }
+    @keyframes orbDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(12px,10px)} }
+    @keyframes orbDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-14px,-8px)} }
+    @keyframes shineSweep {
+      0% { transform: translateX(-160%) rotate(8deg); opacity: 0; }
+      30% { opacity: 1; }
+      60% { transform: translateX(40%) rotate(8deg); opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    @media (max-width:900px) {
+      .cvr-feature-card { width: 100%; max-width: 360px; }
+    }
+    @media (max-width:600px) {
+      .cvr-card-inner { gap: 12px; }
+      .cvr-icon-wrap { width: 100px !important; height: 100px !important; }
+      .cvr-icon { width: 90px !important; }
+      .cvr-label { font-size: 17px !important; }
+      .cvr-sub { font-size: 12px !important; }
+    }
+
+    /* ========================= */
+    /* GIVEAWAY TITLE + SUBTITLE */
+    /* ========================= */
+    .new-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      text-align: center;
+      color: #ffffff;
+      margin: 10px 0 14px;
+      letter-spacing: 1px;
+      text-shadow:
+        0 0 6px rgba(255,255,255,0.9),
+        0 0 14px rgba(255,120,60,0.8),
+        0 0 22px rgba(255,60,60,0.5);
+    }
+    .giveaway-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 32px;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      text-shadow:
+        0 0 6px rgba(255,255,255,0.85),
+        0 0 14px rgba(255,100,50,0.75),
+        0 0 18px rgba(255,0,0,0.55);
+    }
+    @media (max-width: 768px) {
+      .new-title { font-size: 24px; }
+      .giveaway-subtitle { font-size: 17px; }
+    }
+
+    /* ========================= */
+    /* GIVEAWAY GRID             */
+    /* ========================= */
+    .giveaway-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      justify-items: center;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+    .giveaway-box img {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 16px;
+      transition: 0.25s ease;
+      box-shadow: 0 0 20px rgba(255,0,255,0.35);
+      display: block;
+    }
+    .giveaway-box:hover img {
+      transform: scale(1.04);
+      box-shadow: 0 0 25px rgba(255,0,255,0.65);
+    }
+    @media (max-width: 768px) {
+      .giveaway-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ========================= */
+    /* DISCORD CTA               */
+    /* ========================= */
+    .discord-text {
+      margin-top: 35px;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+      padding: 0 12px;
+    }
+    .discord-center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      margin-bottom: 40px;
+    }
+    .discord-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #5865F2;
+      color: white;
+      padding: 12px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      transition: 0.2s ease;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .discord-btn:hover { transform: scale(1.05); }
+    .discord-icon { width: 26px; height: 26px; }
+
+    /* ========================= */
+    /* FOOTER (IDENTICAL)        */
+    /* ========================= */
+    #cvr-footer-wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    .cvr-footer {
+      width: 100%;
+      background: transparent;
+      padding: 50px 0 40px 0;
+      font-family: 'Inter', sans-serif;
+      color: #cfcfcf;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+    .cvr-footer-left-top img {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      filter: drop-shadow(0 0 12px #ff0000);
+    }
+    .cvr-footer-brand { font-size: 18px; font-weight: 600; color: #fff; }
+    .cvr-footer-copyright { font-size: 13px; opacity: 0.7; }
+    .cvr-footer-row {
+      width: 90%;
+      max-width: 1400px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cvr-footer-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .cvr-footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .cvr-footer-socials a img {
+      width: 26px;
+      opacity: 1;
+      filter: brightness(4) invert(1);
+      transition: 0.25s ease;
+    }
+    .cvr-footer-socials a.x:hover img { filter: brightness(5) drop-shadow(0 0 8px #ffffff); }
+    .cvr-footer-socials a.kick:hover img { filter: brightness(5) drop-shadow(0 0 8px #53fc18); }
+    .cvr-footer-socials a.youtube:hover img { filter: brightness(5) drop-shadow(0 0 8px #ff0000); }
+    .cvr-footer-socials a.twitch:hover img { filter: brightness(5) drop-shadow(0 0 8px #9146ff); }
+    .cvr-footer-socials a.discord:hover img { filter: brightness(5) drop-shadow(0 0 8px #5865f2); }
+    @media (max-width: 770px) {
+      .cvr-footer-row { flex-direction: column; gap: 20px; }
+      .cvr-footer-left { align-items: center; } /* Center content when stacked */
+      .cvr-footer-left-top { text-align: center; }
+    }
+
+    /* ========================= */
+    /* NEW: Extra Small Mobile   */
+    /* ========================= */
+    @media (max-width: 480px) {
+      /* Hero Section */
+      .page-hero { padding: 30px 16px 20px; }
+      .page-hero-title { font-size: clamp(48px, 12vw, 120px); }
+      .page-hero-subtitle { font-size: 15px; margin-top: 10px; }
+
+      /* Feature Cards - Minor tweaks for smaller cards */
+      .cvr-feature-card { height: 160px; }
+      .cvr-card-inner { padding: 18px 22px; }
+      .cvr-icon-wrap { width: 90px !important; height: 90px !important; }
+      .cvr-icon { width: 80px !important; }
+
+      /* Giveaway Titles */
+      .new-title { font-size: 20px; }
+      .giveaway-subtitle { font-size: 15px; margin-bottom: 24px; }
+
+      /* Discord CTA */
+      .discord-text { font-size: 16px; margin-top: 25px; }
+      .discord-btn { font-size: 15px; padding: 10px 18px; }
+
+      /* Footer */
+      .cvr-footer-socials { gap: 18px; }
+      .cvr-footer-socials a img { width: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+
+    <img class="nav-logo"
+      src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png"
+      alt="Cvrsify">
+
+    <nav class="nav">
+      <a href="/">Home</a>
+  <a href="/partners">Partners</a>
+  <a class="active" href="/giveaways">Giveaways</a>
+  <a href="/leaderboards">Leaderboards</a>
+  <a href="/milestones">Milestones</a>
+  <a href="/shop">Shop</a>
+  <a href="/about">About Me</a>
+    </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+  </div>
+
+  <div class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <a href="/">Home</a>
+      <a href="/partners">Partners</a>
+      <a class="active" href="/giveaways">Giveaways</a>
+      <a href="/leaderboards">Leaderboards</a>
+      <a href="/milestones">Milestones</a>
+      <a href="/shop">Shop</a>
+      <a href="/about">About Me</a>
+    </div>
+  </div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="page-hero-title">GIVEAWAYS</h1>
+    <p class="page-hero-subtitle">
+      All our active giveaways and rewards! 🖤
+    </p>
+  </div>
+</section>
+
+  <main class="page">
+
+    <div class="cvr-promo-top">
+      <a
+        href="https://www.instagram.com/p/DSAFZB0kVt8/?utm_source=ig_web_copy_link&igsh=aW5jbmFuNm1pamZ0"
+        target="_blank"
+        rel="noopener"
+        class="cvr-promo-box"
+      >
+        <img
+          src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/image.png"
+          alt="Instagram Giveaway"
+        >
+      </a>
+
+      <div class="cvr-promo-box">
+        <img
+          src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/d6a306fa-0883-4662-b5ab-80e0502048e1.png"
+          alt="Holiday Bonus Promo"
+        >
+      </div>
+    </div>
+
+    <div class="cvr-feature-section">
+      <div class="cvr-feature-row">
+
+        <a href="/leaderboards" class="cvr-feature-card">
+          <div class="cvr-card-inner">
+            <div class="cvr-orb orb-1"></div>
+            <div class="cvr-orb orb-2"></div>
+
+            <div class="cvr-icon-wrap">
+              <svg viewBox="0 0 140 110" class="cvr-icon" aria-hidden="true">
+                <defs>
+                  <linearGradient id="grad-podium" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#4e00ff"/>
+                    <stop offset="50%" stop-color="#c800ff"/>
+                    <stop offset="100%" stop-color="#00d0ff"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="70" cy="55" r="48" fill="url(#grad-podium)" opacity="0.9"/>
+                <circle cx="70" cy="55" r="48" fill="#ffffff" opacity="0.16"/>
+                <rect x="28" y="58" width="26" height="26" rx="6" fill="#1b1940"/>
+                <rect x="57" y="48" width="26" height="36" rx="6" fill="#211e55"/>
+                <rect x="86" y="63" width="26" height="21" rx="6" fill="#1b1940"/>
+                <text x="71" y="72" text-anchor="middle" font-size="22" fill="#ffffff" font-weight="800">1</text>
+                <text x="41" y="73" text-anchor="middle" font-size="18" fill="#a5b4ff" font-weight="700">2</text>
+                <text x="99" y="73" text-anchor="middle" font-size="18" fill="#ff89b9" font-weight="700">3</text>
+              </svg>
+            </div>
+
+            <div class="cvr-text-wrap">
+              <div class="cvr-label">LEADERBOARDS</div>
+              <div class="cvr-sub">View top monthly grinders</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="/milestones" class="cvr-feature-card">
+          <div class="cvr-card-inner">
+            <div class="cvr-orb orb-1"></div>
+            <div class="cvr-orb orb-2"></div>
+
+            <div class="cvr-icon-wrap">
+              <svg viewBox="0 0 140 110" class="cvr-icon" aria-hidden="true">
+                <defs>
+                  <linearGradient id="grad-ticket" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00c3ff"/>
+                    <stop offset="50%" stop-color="#4e00ff"/>
+                    <stop offset="100%" stop-color="#ff2fb6"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="70" cy="55" r="48" fill="url(#grad-ticket)" opacity="0.9"/>
+                <circle cx="70" cy="55" r="48" fill="#ffffff" opacity="0.16"/>
+                <path d="M32 40 h60 a6 6 0 0 1 6 6 v6 a7 7 0 0 0 0 14 v6 a6 6 0 0 1 -6 6 h-60 a6 6 0 0 1 -6 -6 v-6 a7 7 0 0 0 0 -14 v-6 a6 6 0 0 1 6 -6z"
+                      fill="#101326"/>
+                <rect x="40" y="48" width="40" height="5" rx="2.5" fill="#3c8bff"/>
+                <rect x="40" y="58" width="48" height="5" rx="2.5" fill="#7f5bff"/>
+                <rect x="40" y="68" width="32" height="5" rx="2.5" fill="#ff71df"/>
+                <circle cx="92" cy="58" r="6" fill="#ff71df"/>
+                <circle cx="92" cy="58" r="3" fill="#ffffff"/>
+              </svg>
+            </div>
+
+            <div class="cvr-text-wrap">
+              <div class="cvr-label">MILESTONES</div>
+              <div class="cvr-sub">Unlock rewards as you wager</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="/giveaways" class="cvr-feature-card">
+          <div class="cvr-card-inner">
+            <div class="cvr-orb orb-1"></div>
+            <div class="cvr-orb orb-2"></div>
+
+            <div class="cvr-icon-wrap">
+              <svg viewBox="0 0 140 110" class="cvr-icon" aria-hidden="true">
+                <defs>
+                  <linearGradient id="grad-gift" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#5b00ff"/>
+                    <stop offset="50%" stop-color="#ff2fb6"/>
+                    <stop offset="100%" stop-color="#00d0ff"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="70" cy="55" r="48" fill="url(#grad-gift)" opacity="0.9"/>
+                <circle cx="70" cy="55" r="48" fill="#ffffff" opacity="0.16"/>
+                <rect x="38" y="52" width="64" height="30" rx="8" fill="#191b3a"/>
+                <rect x="38" y="46" width="64" height="12" rx="6" fill="#23254a"/>
+                <rect x="66" y="46" width="8" height="36" rx="4" fill="#7a5bff"/>
+                <rect x="44" y="60" width="52" height="6" rx="3" fill="#ff71df"/>
+                <path d="M70 42 c4 -6 11 -9 15 -7 c3 1 4 4 3 7 c-2 5 -9 7 -15 5z" fill="#ff71df"/>
+                <path d="M70 42 c-4 -6 -11 -9 -15 -7 c-3 1 -4 4 -3 7 c2 5 9 7 15 5z" fill="#ff71df"/>
+                <circle cx="70" cy="44" r="4" fill="#ffffff"/>
+              </svg>
+            </div>
+
+            <div class="cvr-text-wrap">
+              <div class="cvr-label">GIVEAWAYS</div>
+              <div class="cvr-sub">Join in on our Giveaways</div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <h2 class="new-title">GIVEAWAYS AND LEADERBOARDS FOR ACTIVE CODE USERS</h2>
+    <p class="giveaway-subtitle">Sign up by clicking the images below</p>
+
+    <div class="giveaway-grid">
+      <a href="https://packdraw.com" target="_blank" rel="noopener" class="giveaway-box packdraw">
+        <img
+          src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/other/giveaway-packdraw.png"
+          alt="PackDraw Giveaway"
+        >
+      </a>
+
+      <a
+        href="https://record.96.partners/_IftnDdVFDHJBNMcqFlyYf2Nd7ZgqdRLk/1/?lp=96trustedbet.com/?channel_id=600069980"
+        target="_blank"
+        rel="noopener"
+        class="giveaway-box casino96"
+      >
+        <img
+          src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/002x500x500%20(1).jpg"
+          alt="96 Casino Giveaway"
+        >
+      </a>
+    </div>
+
+    <p class="discord-text">Send proof via our Discord server in the appropriate channel! 👀👇</p>
+
+    <div class="discord-center">
+      <a href="https://discord.gg/kjtWDKu" target="_blank" rel="noopener" class="discord-btn">
+        <img
+          src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/other/discord-button.png"
+          class="discord-icon"
+          alt="Discord"
+        >
+        Join Our Discord
+      </a>
+    </div>
+
+  </main>
+
+  <div id="cvr-footer-wrapper">
+    <div class="cvr-footer">
+      <div class="cvr-footer-row">
+        <div class="cvr-footer-left">
+          <div class="cvr-footer-left-top">
+            <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png" alt="Cvrsify logo">
+            <div class="cvr-footer-brand">Cvrsify</div>
+          </div>
+          <div class="cvr-footer-copyright">
+            © 2025 Cvrsify. All rights reserved.
+          </div>
+        </div>
+
+        <div class="cvr-footer-socials">
+          <a class="x" href="https://www.x.com/cvrsify" target="_blank" rel="noopener">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X">
+          </a>
+          <a class="kick" href="https://www.kick.com/cvrsify" target="_blank" rel="noopener">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/kick.svg" alt="Kick">
+          </a>
+          <a class="youtube" href="https://www.youtube.com/@cvrsify" target="_blank" rel="noopener">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
+          </a>
+          <a class="twitch" href="https://www.twitch.tv/cvrsify" target="_blank" rel="noopener">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg" alt="Twitch">
+          </a>
+          <a class="discord" href="https://discord.com/invite/kjtWDKu" target="_blank" rel="noopener">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Page fade-in */
+    window.addEventListener("load", () => document.body.classList.add("loaded"));
+
+    /* Page fade-out for INTERNAL links only */
+    document.querySelectorAll("a[href^='/']").forEach(link => {
+      link.addEventListener("click", (e) => {
+        // allow new tab / modified clicks
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === "_blank") return;
+
+        e.preventDefault();
+        const href = link.getAttribute("href");
+
+        // close mobile menu if open
+        const mn = document.getElementById("mobileNav");
+        if (mn) mn.classList.remove("show");
+
+        document.body.classList.remove("loaded");
+        setTimeout(() => { window.location.href = href; }, 250);
+      });
+    });
+
+    /* Mobile menu */
+    function toggleMenu() {
+      document.getElementById("mobileNav").classList.toggle("show");
+    }
+    // close on outside click
+    document.addEventListener("click", (e) => {
+      const nav = document.getElementById("mobileNav");
+      const ham = document.querySelector(".hamburger");
+      if (!nav || !ham) return;
+      if (!nav.classList.contains("show")) return;
+      if (nav.contains(e.target) || ham.contains(e.target)) return;
+      nav.classList.remove("show");
+    });
+
+    /* 3D Tilt Interaction (cards) */
+    document.querySelectorAll('.cvr-feature-card').forEach(card => {
+      const inner = card.querySelector('.cvr-card-inner');
+      if (!inner) return;
+
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const mx = r.width / 2;
+        const my = r.height / 2;
+
+        const ry = ((x - mx) / mx) * 10;
+        const rx = ((my - y) / my) * 8;
+
+        inner.style.transform = `translateY(0px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        inner.style.transform = `translateY(0px) rotateX(0deg) rotateY(0deg)`;
+      });
+
+      // touch: disable tilt weirdness
+      card.addEventListener('touchstart', () => {
+        inner.style.transform = `translateY(0px) rotateX(0deg) rotateY(0deg)`;
+      }, { passive: true });
+    });
+
+    const navWrap = document.querySelector('.nav-wrap');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 12) {
+        navWrap.classList.add('scrolled');
+      } else {
+        navWrap.classList.remove('scrolled');
+      }
+    });
+
+  </script>
+
+</body>
+</html>

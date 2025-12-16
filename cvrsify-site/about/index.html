@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- CVRSIFY Favicon -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<!-- Google / Social Preview -->
+<meta property="og:image" content="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Me | Cvrsify</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+<style>
+/* ========================= */
+/* GLOBAL / BACKGROUND       */
+/* ========================= */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { width: 0; height: 0; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, sans-serif;
+  color: #fff;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,0,0,.12), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,180,.10), transparent 55%),
+    radial-gradient(circle at 60% 90%, rgba(0,210,255,.10), transparent 55%),
+    linear-gradient(180deg, #060611, #02020a 60%, #050510);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+body.loaded { opacity: 1; }
+
+/* ================= NAV (MATCHES PARTNERS EXACTLY) ================= */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background: rgba(6,6,17,.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.nav-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+.nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+}
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: .85;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: .2s ease; /* Added for better desktop hover */
+}
+.nav a:hover { opacity: 1; background: rgba(255,255,255,.06); } /* Added for better desktop hover */
+.nav a.active {
+  opacity: 1;
+  background: rgba(255,0,0,.18);
+  box-shadow: 0 0 14px rgba(255,0,0,.25);
+}
+
+/* --- MOBILE NAV STYLES --- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  margin-right: -8px;
+  margin-left: auto; /* Push it to the right */
+  -webkit-tap-highlight-color: transparent; /* better touch support */
+}
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+}
+
+.mobile-nav {
+  display: none;
+  background: rgba(10,10,25,.95);
+  border-top: 1px solid rgba(255,255,255,.08);
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+.mobile-nav a {
+  display: block;
+  padding: 14px 18px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background .15s ease;
+}
+.mobile-nav a:hover {
+  background: rgba(255,255,255,.06);
+}
+.mobile-nav a.active {
+  background: rgba(255,0,0,.18);
+}
+.mobile-nav.show { display: block; }
+
+@media (max-width: 900px) {
+  .nav { display: none; } /* Hide desktop nav */
+  .hamburger { display: flex; } /* Show hamburger */
+}
+/* --- END MOBILE NAV STYLES --- */
+
+/* ================= CONTENT ================= */
+.about-wrapper {
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 16px;
+}
+.about-card {
+  max-width: 820px;
+  width: 100%;
+  padding: 60px 40px;
+  border-radius: 18px;
+  background: rgba(0,0,0,.35);
+  box-shadow: 0 0 40px rgba(0,0,0,.45);
+  text-align: center;
+}
+.about-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(48px, 8vw, 96px);
+  margin: 0 0 10px;
+}
+.about-sub {
+  font-size: 18px;
+  opacity: .85;
+  letter-spacing: .05em;
+}
+/* Mobile specific content fixes */
+@media (max-width: 600px) {
+    .about-card {
+        padding: 40px 20px;
+    }
+    .about-sub {
+        font-size: 16px;
+    }
+}
+
+
+/* ================= FOOTER (RESTORED + COLORED GLOWS) ================= */
+#cvr-footer-wrapper {
+  width: 100%;
+}
+
+.cvr-footer {
+  padding: 50px 0 40px;
+  font-family: 'Inter', sans-serif;
+  color: #cfcfcf;
+  display: flex;
+  justify-content: center;
+}
+
+.cvr-footer-row {
+  width: 90%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cvr-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cvr-footer-left-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cvr-footer-left-top img {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+
+.cvr-footer-brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.cvr-footer-copyright {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.cvr-footer-socials {
+  display: flex;
+  gap: 22px;
+}
+
+.cvr-footer-socials img {
+  width: 26px;
+  filter: brightness(4) invert(1);
+  transition: .25s ease;
+}
+
+/* SOCIAL COLOR GLOWS */
+.cvr-footer-socials a.x:hover img { filter: brightness(5) drop-shadow(0 0 8px #ffffff); }
+.cvr-footer-socials a.kick:hover img { filter: brightness(5) drop-shadow(0 0 8px #53fc18); }
+.cvr-footer-socials a.youtube:hover img { filter: brightness(5) drop-shadow(0 0 8px #ff0000); }
+.cvr-footer-socials a.twitch:hover img { filter: brightness(5) drop-shadow(0 0 8px #9146ff); }
+.cvr-footer-socials a.discord:hover img { filter: brightness(5) drop-shadow(0 0 8px #5865f2); }
+
+@media (max-width: 770px) {
+  .cvr-footer-row {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* Center the whole row */
+  }
+  .cvr-footer-left {
+    align-items: center; /* Center the left block */
+  }
+  .cvr-footer-left-top {
+    /* Ensures the logo and brand text are together and centered */
+    justify-content: center;
+  }
+}
+@media (max-width: 480px) {
+    .cvr-footer-socials { gap: 18px; }
+    .cvr-footer-socials img { width: 22px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <img class="nav-logo" src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png" alt="Cvrsify logo">
+    
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/partners">Partners</a>
+      <a href="/giveaways">Giveaways</a>
+      <a href="/leaderboards">Leaderboards</a>
+      <a href="/milestones">Milestones</a>
+      <a href="/shop">Shop</a>
+      <a class="active" href="/about">About Me</a>
+    </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <a href="/">Home</a>
+    <a href="/partners">Partners</a>
+    <a href="/giveaways">Giveaways</a>
+    <a href="/leaderboards">Leaderboards</a>
+    <a href="/milestones">Milestones</a>
+    <a href="/shop">Shop</a>
+    <a class="active" href="/about">About Me</a>
+  </div>
+</div>
+
+<section class="about-wrapper">
+  <div class="about-card">
+    <h1 class="about-title">About Me</h1>
+    <div class="about-sub">IN THE MAKING<br>STAY TUNED! 🖤</div>
+  </div>
+</section>
+
+<div id="cvr-footer-wrapper">
+  <div class="cvr-footer">
+    <div class="cvr-footer-row">
+
+      <div class="cvr-footer-left">
+        <div class="cvr-footer-left-top">
+          <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/logo1.png" alt="Cvrsify logo">
+          <div class="cvr-footer-brand">Cvrsify</div>
+        </div>
+        <div class="cvr-footer-copyright">
+          © 2025 Cvrsify. All rights reserved.
+        </div>
+      </div>
+
+      <div class="cvr-footer-socials">
+        <a class="x" href="https://www.x.com/cvrsify" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X icon">
+        </a>
+        <a class="kick" href="https://www.kick.com/cvrsify" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/kick.svg" alt="Kick icon">
+        </a>
+        <a class="youtube" href="https://www.youtube.com/@cvrsify" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube icon">
+        </a>
+        <a class="twitch" href="https://www.twitch.tv/cvrsify" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg" alt="Twitch icon">
+        </a>
+        <a class="discord" href="https://discord.com/invite/kjtWDKu" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord icon">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+window.addEventListener("load",()=>document.body.classList.add("loaded"));
+
+/* Page fade-out for INTERNAL links only */
+document.querySelectorAll("a[href^='/']").forEach(link => {
+  link.addEventListener("click", (e) => {
+    // allow new tab / modified clicks
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === "_blank") return;
+
+    e.preventDefault();
+    const href = link.getAttribute("href");
+    
+    // close mobile menu if open
+    const mn = document.getElementById("mobileNav");
+    if (mn) mn.classList.remove("show");
+
+    document.body.classList.remove("loaded");
+    setTimeout(() => { window.location.href = href; }, 250);
+  });
+});
+
+/* --- MOBILE MENU LOGIC ADDED HERE --- */
+function toggleMenu() {
+  document.getElementById("mobileNav").classList.toggle("show");
+}
+// close on outside click
+document.addEventListener("click", (e) => {
+  const nav = document.getElementById("mobileNav");
+  const ham = document.querySelector(".hamburger");
+  if (!nav || !ham) return;
+  // Check if menu is open
+  if (!nav.classList.contains("show")) return;
+  // Check if click target is the menu or the button
+  if (nav.contains(e.target) || ham.contains(e.target)) return;
+  // If not, close the menu
+  nav.classList.remove("show");
+});
+/* --- END MOBILE MENU LOGIC --- */
+</script>
+
+</body>
+</html>

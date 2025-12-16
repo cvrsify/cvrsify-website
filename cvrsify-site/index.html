@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- CVRSIFY Favicon -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<!-- Google / Social Preview -->
+<meta property="og:image" content="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cvrsify</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+<style>
+/* ========================= */
+/* GLOBAL / SCROLL           */
+/* ========================= */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar { width: 0; height: 0; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, sans-serif;
+  color: #fff;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,0,0,.12), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,180,.10), transparent 55%),
+    radial-gradient(circle at 60% 90%, rgba(0,210,255,.10), transparent 55%),
+    linear-gradient(180deg, #060611, #02020a 60%, #050510);
+  /* FADE CSS REMOVED */
+}
+
+/* FADE-IN CLASS REMOVED */
+
+/* ========================= */
+/* STICKY NAV (MATCH OTHERS) */
+/* ========================= */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background: rgba(6,6,17,.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 12px #ff0000);
+}
+
+.nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: .85;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: .2s ease;
+}
+.nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
+.nav a.active {
+  opacity: 1;
+  background: rgba(255,0,0,.18);
+  box-shadow: 0 0 14px rgba(255,0,0,.25);
+}
+
+/* Mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+}
+
+.mobile-nav {
+  display: none;
+  background: rgba(10,10,25,.95);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.mobile-nav a {
+  display: block;
+  padding: 14px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+.mobile-nav a.active {
+  background: rgba(255,0,0,.18);
+}
+
+.mobile-nav.show { display: block; }
+
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .hamburger { display: flex; margin-left: auto; }
+}
+
+/* FIX 1: Adjust nav padding and logo size for very small phones */
+@media (max-width: 480px) {
+  .nav-inner {
+    padding: 10px 12px; /* Reduce padding on narrow screens */
+  }
+  .nav-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+}
+
+/* ========================= */
+/* HERO                      */
+/* ========================= */
+@keyframes cvrFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cvr-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 16px 20px;
+  text-align: center;
+}
+
+.cvr-hero-title {
+  animation: cvrFadeUp .8s ease-out both;
+  font-family: Anton, sans-serif;
+  font-size: clamp(72px, 12vw, 148px);
+  letter-spacing: .035em;
+  margin: 0 0 22px;
+}
+
+.cvr-hero-sub {
+  animation: cvrFadeUp .8s ease-out both;
+  animation-delay: .12s;
+  font-size: 18px;
+}
+
+.cvr-hero-note {
+  animation: cvrFadeUp .8s ease-out both;
+  animation-delay: .22s;
+  font-size: 15px;
+  opacity: .75;
+  margin-bottom: 14px;
+}
+
+.cvr-hero-mail {
+  animation: cvrFadeUp .8s ease-out both;
+  animation-delay: .32s;
+  margin: 8px auto 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ff1f1f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(255,0,0,.6);
+}
+
+/* ========================= */
+/* FEATURE CARDS + STREAMS   */
+/* ========================= */
+.cvr-feature-row,
+.streams-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 26px;
+}
+
+/* ========================= */
+/* SOCIAL + FOOTER           */
+/* ========================= */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 16px;
+}
+
+/* ========================= */
+/* MOBILE (REDUNDANT BUT KEPT FOR CLARITY) */
+/* ========================= */
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .hamburger { display: flex; }
+  .mobile-nav.show { display: block; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+
+    <img class="nav-logo"
+      src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png"
+      alt="Cvrsify">
+
+    <nav class="nav">
+      <a class="active" href="/">Home</a>
+      <a href="/partners/">Partners</a>
+      <a href="/giveaways/">Giveaways</a>
+      <a href="/leaderboards/">Leaderboards</a>
+      <a href="/milestones/">Milestones</a>
+      <a href="/shop/">Shop</a>
+      <a href="/about/">About Me</a>
+    </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+  </div>
+
+ <div id="mobileNav" class="mobile-nav">
+    <a class="active" href="/">Home</a>
+    <a href="/partners/">Partners</a>
+    <a href="/giveaways/">Giveaways</a>
+    <a href="/leaderboards/">Leaderboards</a>
+    <a href="/milestones/">Milestones</a>
+    <a href="/shop/">Shop</a>
+    <a href="/about/">About Me</a>
+  </div>
+</div>
+
+<section class="cvr-hero">
+  <h1 class="cvr-hero-title">CVRSIFY.COM</h1>
+  <p class="cvr-hero-sub">
+    Everything in one place!<br>
+    Just click where you wanna go!
+  </p>
+  <p class="cvr-hero-note">
+    For business inquiries, use the email or telegram below! 🖤
+  </p>
+  <a
+    href="mailto:cvrsifybusiness@gmail.com"
+    class="cvr-hero-mail"
+    target="_blank"
+    rel="noopener"
+    aria-label="Email Cvrsify"
+  >
+    ✉
+  </a>
+</section>
+
+<div class="cvr-feature-section">
+  <div class="cvr-feature-row">
+
+    <a href="/leaderboards/" class="cvr-feature-card">
+      <div class="cvr-card-inner">
+        <div class="cvr-orb orb-1"></div>
+        <div class="cvr-orb orb-2"></div>
+        <div class="cvr-glow-ring"></div>
+
+        <div class="cvr-icon-wrap">
+          <svg viewBox="0 0 140 110" class="cvr-icon">
+            <defs>
+              <linearGradient id="grad-podium" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4e00ff"/>
+                <stop offset="50%" stop-color="#c800ff"/>
+                <stop offset="100%" stop-color="#00d0ff"/>
+              </linearGradient>
+            </defs>
+            <circle cx="70" cy="55" r="48" fill="url(#grad-podium)" opacity="0.9"/>
+            <circle cx="70" cy="55" r="48" fill="#ffffff" opacity="0.16"/>
+            <rect x="28" y="58" width="26" height="26" rx="6" fill="#1b1940"/>
+            <rect x="57" y="48" width="26" height="36" rx="6" fill="#211e55"/>
+            <rect x="86" y="63" width="26" height="21" rx="6" fill="#1b1940"/>
+            <text x="71" y="72" text-anchor="middle" font-size="22" fill="#ffffff" font-weight="800">1</text>
+            <text x="41" y="73" text-anchor="middle" font-size="18" fill="#a5b4ff" font-weight="700">2</text>
+            <text x="99" y="73" text-anchor="middle" font-size="18" fill="#ff89b9" font-weight="700">3</text>
+          </svg>
+        </div>
+
+        <div class="cvr-text-wrap">
+          <div class="cvr-label">LEADERBOARDS</div>
+          <div class="cvr-sub">View top monthly grinders</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="/milestones/" class="cvr-feature-card">
+      <div class="cvr-card-inner">
+        <div class="cvr-orb orb-1"></div>
+        <div class="cvr-orb orb-2"></div>
+        <div class="cvr-glow-ring"></div>
+
+        <div class="cvr-icon-wrap">
+          <svg viewBox="0 0 140 110" class="cvr-icon">
+            <defs>
+              <linearGradient id="grad-ticket" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00c3ff"/>
+                <stop offset="50%" stop-color="#4e00ff"/>
+                <stop offset="100%" stop-color="#ff2fb6"/>
+              </linearGradient>
+            </defs>
+            <circle cx="70" cy="55" r="48" fill="url(#grad-ticket)" opacity="0.9"/>
+            <circle cx="70" cy="55" r="48" fill="#ffffff" opacity="0.16"/>
+            <path d="M32 40 h60 a6 6 0 0 1 6 6 v6 a7 7 0 0 0 0 14 v6 a6 6 0 0 1 -6 6 h-60 a6 6 0 0 1 -6 -6 v-6 a7 7 0 0 0 0 -14 v-6 a6 6 0 0 1 6 -6z"
+                  fill="#101326"/>
+            <rect x="40" y="48" width="40" height="5" rx="2.5" fill="#3c8bff"/>
+            <rect x="40" y="58" width="48" height="5" rx="2.5" fill="#7f5bff"/>
+            <rect x="40" y="68" width="32" height="5" rx="2.5" fill="#ff71df"/>
+            <circle cx="92" cy="58" r="6" fill="#ff71df"/>
+            <circle cx="92" cy="58" r="3" fill="#ffffff"/>
+          </svg>
+        </div>
+
+        <div class="cvr-text-wrap">
+          <div class="cvr-label">MILESTONES</div>
+          <div class="cvr-sub">Unlock rewards as you wager</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="/giveaways/" class="cvr-feature-card">
+      <div class="cvr-card-inner">
+        <div class="cvr-orb orb-1"></div>
+        <div class="cvr-orb orb-2"></div>
+        <div class="cvr-glow-ring"></div>
+
+        <div class="cvr-icon-wrap">
+          <svg viewBox="0 0 140 110" class="cvr-icon">
+            <defs>
+              <linearGradient id="grad-gift" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#5b00ff"/>
+                <stop offset="50%" stop-color="#ff2fb6"/>
+                <stop offset="100%" stop-color="#00d0ff"/>
+              </linearGradient>
+            </defs>
+            <circle cx="70" cy="55" r="48" fill="url(#grad-gift)" opacity="0.9"/>
+            <circle cx="70" cy="55" r="48" fill="#ffffff" opacity="0.16"/>
+            <rect x="38" y="52" width="64" height="30" rx="8" fill="#191b3a"/>
+            <rect x="38" y="46" width="64" height="12" rx="6" fill="#23254a"/>
+            <rect x="66" y="46" width="8" height="36" rx="4" fill="#7a5bff"/>
+            <rect x="44" y="60" width="52" height="6" rx="3" fill="#ff71df"/>
+            <path d="M70 42 c4 -6 11 -9 15 -7 c3 1 4 4 3 7 c-2 5 -9 7 -15 5z" fill="#ff71df"/>
+            <path d="M70 42 c-4 -6 -11 -9 -15 -7 c-3 1 -4 4 -3 7 c2 5 9 7 15 5z" fill="#ff71df"/>
+            <circle cx="70" cy="44" r="4" fill="#ffffff"/>
+          </svg>
+        </div>
+
+        <div class="cvr-text-wrap">
+          <div class="cvr-label">GIVEAWAYS</div>
+          <div class="cvr-sub">Join in on our Giveaways</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<style>
+/* ========================= */
+/* GENERAL CONTAINERS        */
+/* ========================= */
+.cvr-feature-section {
+  padding: 10px 0 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.cvr-feature-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  justify-content: center;
+  max-width: 1100px;
+}
+
+/* ========================= */
+/* UNIVERSAL CARD BASE       */
+/* ========================= */
+.cvr-feature-card {
+  position: relative;
+  width: 340px;
+  height: 190px;
+  border-radius: 24px;
+  padding: 0;
+  text-decoration: none;
+  background: radial-gradient(circle at 10% 0%, #1a1035 0%, #050616 55%, #110b26 100%);
+  box-shadow:
+    0 0 0 1px rgba(112, 99, 255, 0.2),
+    0 0 40px rgba(81, 0, 255, 0.55),
+    0 0 120px rgba(0, 214, 255, 0.45);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  border: 1px solid rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+/* ========================= */
+/* UNIVERSAL INNER LAYOUT    */
+/* ========================= */
+.cvr-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  animation: cvrFloat 4.2s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+/* ========================= */
+/* UNIVERSAL ICON SIZE       */
+/* ========================= */
+.cvr-icon-wrap {
+  width: 120px !important;
+  height: 120px !important;
+  flex-shrink: 0;
+  transform: translateZ(35px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cvr-icon {
+  width: 105px !important;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 14px rgba(0,0,0,0.6))
+          drop-shadow(0 0 16px rgba(142,117,255,0.75));
+}
+
+/* ========================= */
+/* UNIVERSAL TEXT FIX        */
+/* ========================= */
+.cvr-text-wrap {
+  transform: translateZ(40px);
+  margin-left: -40px !important;
+  max-width: 200px !important;
+}
+
+.cvr-label {
+  font-size: 18px !important;
+  font-weight: 800;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  text-shadow: 0 0 8px rgba(255,255,255,0.45);
+}
+
+.cvr-sub {
+  font-size: 13px !important;
+  line-height: 1.2em !important;
+  opacity: 0.9;
+  color: #c7d2ff;
+}
+
+/* ========================= */
+/* ORBS / GLOW EFFECTS       */
+/* ========================= */
+.cvr-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(16px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.orb-1 {
+  width: 130px; height: 130px;
+  background: radial-gradient(circle,#7b5bff,transparent);
+  top: -25px; left: -40px;
+  animation: orbDrift1 9s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 90px; height: 90px;
+  background: radial-gradient(circle,#00d9ff,transparent);
+  bottom: -25px; right: -10px;
+  animation: orbDrift2 10s ease-in-out infinite;
+}
+
+/* ========================= */
+/* SHINE SWEEP               */
+/* ========================= */
+.cvr-feature-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.22) 40%, rgba(255,255,255,0) 70%);
+  transform: translateX(-160%) rotate(8deg);
+  animation: shineSweep 7s ease-in-out infinite;
+}
+
+/* ========================= */
+/* HOVER EFFECTS             */
+/* ========================= */
+.cvr-feature-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(187,177,255,0.6),
+    0 0 55px rgba(112,90,255,0.95),
+    0 0 150px rgba(0,214,255,0.75);
+}
+
+.cvr-feature-card:hover .cvr-card-inner {
+  animation-duration: 2.6s;
+}
+
+.cvr-feature-card:active {
+  transform: scale(0.98);
+}
+
+/* ========================= */
+/* ANIMATIONS                */
+/* ========================= */
+@keyframes cvrFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes orbDrift1 {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(12px,10px); }
+}
+
+@keyframes orbDrift2 {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(-14px,-8px); }
+}
+
+@keyframes shineSweep {
+  0% { transform: translateX(-160%) rotate(8deg); opacity: 0; }
+  30% { opacity: 1; }
+  60% { transform: translateX(40%) rotate(8deg); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* ========================= */
+/* RESPONSIVE (Adjusted for better mobile compatibility) */
+/* ========================= */
+@media (max-width:900px) {
+  .cvr-feature-card {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+@media (max-width:600px) {
+  .cvr-card-inner { gap: 12px; }
+  .cvr-icon-wrap { width: 100px !important; height: 100px !important; }
+  .cvr-icon { width: 90px !important; }
+  .cvr-label { font-size: 16px !important; /* Slightly smaller label */ }
+  .cvr-sub { font-size: 12px; }
+  /* FIX 2: Tighter layout on very small screens to prevent text overflow */
+  .cvr-text-wrap {
+    margin-left: -20px !important;
+    max-width: 180px !important;
+  }
+}
+
+/* Added a fix for extremely narrow screens */
+@media (max-width: 400px) {
+  .cvr-card-inner {
+    padding: 20px 20px;
+    gap: 8px;
+  }
+  .cvr-text-wrap {
+    margin-left: -10px !important; /* Move text back slightly */
+  }
+}
+</style>
+
+<script>
+/* 3D Tilt Interaction */
+document.querySelectorAll('.cvr-feature-card').forEach(card => {
+  const inner = card.querySelector('.cvr-card-inner');
+
+  card.addEventListener('mousemove', (e) => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    const mx = r.width / 2;
+    const my = r.height / 2;
+
+    const ry = ((x - mx) / mx) * 10;
+    const rx = ((my - y) / my) * 8;
+
+    inner.style.transform = `translateY(0px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    inner.style.transform = `translateY(0px) rotateX(0deg) rotateY(0deg)`;
+  });
+});
+</script>
+
+<style>
+:root {
+  --twitchGlow: #b066ff;
+  --kickGlow: #00ff5e;
+  --maxWidth: 1100px;
+  --playerWidth: 500px;
+}
+
+/* STREAM CONTAINER */
+.streams-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 26px;
+  max-width: var(--maxWidth);
+  margin: 0 auto;
+  padding: 20px 10px 40px;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 1000px) {
+  .streams-container { flex-wrap: wrap; }
+  .player-box { width: 100%; max-width: 600px; margin: 0 auto; }
+}
+
+/* FIX 3: Add side padding to streams container on mobile */
+@media (max-width: 600px) {
+  .streams-container {
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 16px; /* Reduced gap between players when stacked */
+  }
+}
+
+/* PLAYER BOX */
+.player-box { width: var(--playerWidth); padding: 12px; border-radius: 18px; }
+/* NOTE: The max-width 600px in the media query above handles mobile width well */
+
+
+/* TWITCH PLAYER BOX */
+.twitch-wrapper {
+  width: 100%;
+  border-radius: 18px;
+  border: 3px solid var(--twitchGlow);
+  box-shadow: 0 0 20px rgba(176,102,255,0.8), 0 0 45px rgba(176,102,255,0.6), 0 0 70px rgba(176,102,255,0.4);
+  animation: twitchGlow 3s ease-in-out infinite;
+}
+@keyframes twitchGlow {
+  0%,100% { box-shadow: 0 0 20px rgba(176,102,255,0.7), 0 0 45px rgba(176,102,255,0.55), 0 0 70px rgba(176,102,255,0.35); }
+  50% { box-shadow: 0 0 30px rgba(194,136,255,1), 0 0 70px rgba(194,136,255,0.9), 0 0 110px rgba(194,136,255,0.7); }
+}
+.twitch-responsive { position: relative; width: 100%; padding-top: 55%; border-radius: 12px; overflow: hidden; }
+.twitch-responsive #twitch-embed { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; border: none; }
+
+/* KICK PLAYER BOX */
+.kick-wrapper {
+  width: 100%;
+  border-radius: 18px;
+  border: 3px solid var(--kickGlow);
+  box-shadow: 0 0 20px rgba(0,255,94,0.8), 0 0 45px rgba(0,255,94,0.6), 0 0 70px rgba(0,255,94,0.4);
+  animation: kickGlow 3s ease-in-out infinite;
+}
+@keyframes kickGlow {
+  0%,100% { box-shadow: 0 0 20px rgba(0,255,94,0.7), 0 0 45px rgba(0,255,94,0.55), 0 0 70px rgba(0,255,94,0.35); }
+  50% { box-shadow: 0 0 30px rgba(115,255,170,1), 0 0 70px rgba(115,255,170,0.9), 0 0 110px rgba(115,255,170,0.7); }
+}
+
+/* SOCIAL BUTTONS */
+.social-wrapper { max-width: 1000px; margin: 10px auto 60px; padding: 10px; }
+/* FIX 4: Increased side padding on social wrapper for better mobile look */
+@media (max-width: 768px) {
+  .social-wrapper {
+    padding: 10px 16px 60px;
+  }
+}
+
+.social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 768px) { .social-grid { grid-template-columns: 1fr; } }
+.social-link {
+  display: flex; align-items: center;
+  padding: 14px 20px; border-radius: 18px;
+  text-decoration: none; color: #fff;
+  font-weight: 700; font-size: 18px;
+  position: relative;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+  transition: 0.2s ease;
+}
+.social-link:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0,0,0,0.55); }
+.social-icon {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 14px;
+}
+.social-icon img { width: 28px; height: 28px; object-fit: contain; padding: 2px; }
+
+/* Fortnite full-row */
+.full-row { grid-column: 1 / -1; display: flex; justify-content: center; }
+.full-row a { width: 100%; max-width: 480px; }
+
+/* BUTTON COLORS */
+.kick { background: linear-gradient(90deg,#16e447,#00bd36); }
+.twitch { background: linear-gradient(90deg,#a066ff,#7a32ff); }
+.twitterx { background: linear-gradient(90deg,#2a2a2a,#000); }
+.youtube1 { background: linear-gradient(90deg,#ff2d2d,#c70000); }
+.youtube2 { background: linear-gradient(90deg,#ff4b4b,#c70000); }
+.tiktok { background: linear-gradient(90deg,#44e3ff,#e4387f); }
+.instagram { background: linear-gradient(90deg,#ff7a00,#ff0069); }
+.discord { background: linear-gradient(90deg,#4c6cff,#4158d0); }
+.snapchat { background: linear-gradient(90deg,#ffe900,#f5d400); color:#000; }
+.rumble { background: linear-gradient(90deg,#4cd137,#3cb82b); }
+.facebook { background: linear-gradient(90deg,#1877f2,#1456bf); }
+.telegram { background: linear-gradient(90deg,#2ca5e0,#1d8bc3); }
+.fortnite { background: linear-gradient(90deg,#3a73ff,#2740c9) !important; }
+
+/* MINIMAL FOOTER */
+#cvr-footer-wrapper { width: 100% !important; max-width: 100% !important; text-align: center; }
+.cvr-footer {
+  width: 100%;
+  background: transparent;
+  padding: 50px 0 40px 0;
+  color: #cfcfcf;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.cvr-footer-logo { width: 50px; height: 50px; border-radius: 12px; filter: drop-shadow(0 0 14px #ff0000); }
+.cvr-footer-brand { font-size: 20px; font-weight: 600; color: #fff; }
+.cvr-footer-copyright { font-size: 13px; opacity: 0.75; }
+</style>
+
+<div class="streams-container">
+  <div class="player-box twitch-wrapper">
+    <div class="twitch-responsive">
+      <div id="twitch-embed"></div>
+    </div>
+  </div>
+
+  <div class="player-box kick-wrapper">
+    <div style="position:relative;width:100%;padding-top:56%;border-radius:12px;overflow:hidden;">
+      <iframe
+        src="https://player.kick.com/cvrsify?autoplay=true&muted=true"
+        allowfullscreen
+        scrolling="no"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+<script>
+new Twitch.Player("twitch-embed", {
+  width: "100%",
+  height: "100%",
+  channel: "cvrsify",
+  parent: [
+    "www.cvrsify.com",
+    "cvrsify.com",
+    "gregarious-otter-d01c0b.netlify.app",
+    "localhost",
+    "127.0.0.1"
+  ]
+});
+</script>
+
+<div class="social-wrapper">
+  <div class="social-grid">
+
+    <a class="social-link twitch" href="https://twitch.tv/cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/twitch.png"></div>
+      Twitch
+    </a>
+
+    <a class="social-link kick" href="https://kick.com/cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/kick.png"></div>
+      Kick
+    </a>
+
+    <a class="social-link twitterx" href="https://x.com/cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/twitter.png"></div>
+      X @cvrsify
+    </a>
+
+    <a class="social-link twitterx" href="https://x.com/CvrsifyRewards" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/twitter.png"></div>
+      X @CvrsifyRewards
+    </a>
+
+    <a class="social-link youtube1" href="https://youtube.com/@cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/youtube-main.png"></div>
+      YouTube @cvrsify
+    </a>
+
+    <a class="social-link youtube2" href="https://youtube.com/@cvrsifylive" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/youtube-live.png"></div>
+      YouTube @cvrsifylive
+    </a>
+
+    <a class="social-link tiktok" href="https://tiktok.com/@cvrsifyy" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/tiktok.png"></div>
+      TikTok
+    </a>
+
+    <a class="social-link instagram" href="https://instagram.com/cvrsifyy" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/instagram.png"></div>
+      Instagram
+    </a>
+
+    <a class="social-link discord" href="https://discord.gg/kjtWDKu" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/discord.png"></div>
+      Discord
+    </a>
+
+    <a class="social-link snapchat" href="https://snapchat.com/add/cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/snapchat.png"></div>
+      Snapchat
+    </a>
+
+    <a class="social-link rumble" href="https://rumble.com/user/cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/rumble.png"></div>
+      Rumble
+    </a>
+
+    <a class="social-link facebook" href="https://facebook.com/cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/facebook.png"></div>
+      Facebook
+    </a>
+
+    <a class="social-link telegram" href="https://t.me/cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/telegram.png"></div>
+      Telegram
+    </a>
+
+    <a class="social-link fortnite" href="https://fortnite.com/@cvrsify" target="_blank">
+      <div class="social-icon"><img src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/icons/fortnite.png"></div>
+      Fortnite Maps
+    </a>
+
+  </div>
+</div>
+
+<div id="cvr-footer-wrapper">
+  <div class="cvr-footer">
+    <img class="cvr-footer-logo" src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/logo1.png">
+    <div class="cvr-footer-brand">Cvrsify</div>
+    <div class="cvr-footer-copyright">© 2025 Cvrsify. All rights reserved.</div>
+  </div>
+</div>
+
+<script>
+/* 3D Tilt Interaction */
+document.querySelectorAll('.cvr-feature-card').forEach(card => {
+  const inner = card.querySelector('.cvr-card-inner');
+
+  card.addEventListener('mousemove', (e) => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    const mx = r.width / 2;
+    const my = r.height / 2;
+
+    const ry = ((x - mx) / mx) * 10;
+    const rx = ((my - y) / my) * 8;
+
+    inner.style.transform = `translateY(0px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    inner.style.transform = `translateY(0px) rotateX(0deg) rotateY(0deg)`;
+  });
+});
+</script>
+
+<script>
+  /* Mobile menu toggle */
+  function toggleMenu() {
+    document.getElementById("mobileNav").classList.toggle("show");
+  }
+  
+  // Fade-in and fade-out logic removed for fastest load/navigation time.
+</script>
+
+</body>
+</html>
