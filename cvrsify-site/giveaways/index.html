@@ -356,12 +356,24 @@
       .cvr-feature-card { width: 100%; max-width: 360px; }
     }
     @media (max-width:600px) {
-      .cvr-card-inner { gap: 12px; }
-      .cvr-icon-wrap { width: 100px !important; height: 100px !important; }
-      .cvr-icon { width: 90px !important; }
-      .cvr-label { font-size: 17px !important; }
-      .cvr-sub { font-size: 12px !important; }
-    }
+  .cvr-card-inner { gap: 12px; }
+  .cvr-icon-wrap { width: 100px !important; height: 100px !important; }
+  .cvr-icon { width: 90px !important; }
+  .cvr-label { font-size: 17px !important; }
+  .cvr-sub { font-size: 12px !important; }
+
+  /* ✅ FIX: CENTER GIVEAWAYS TITLE + TEXT ON MOBILE */
+  .cvr-feature-card .cvr-text-wrap {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    text-align: center;
+  }
+
+  .cvr-feature-card .cvr-label,
+  .cvr-feature-card .cvr-sub {
+    text-align: center;
+  }
+}
 
     /* ========================= */
     /* GIVEAWAY TITLE + SUBTITLE */
