@@ -19,9 +19,7 @@
 /* ========================= */
 /* GLOBAL / SCROLL           */
 /* ========================= */
-html {
-  scrollbar-width: none;
-}
+html { scrollbar-width: none; }
 html::-webkit-scrollbar { width: 0; height: 0; }
 
 body {
@@ -34,10 +32,7 @@ body {
     radial-gradient(circle at 80% 30%, rgba(255,0,180,.10), transparent 55%),
     radial-gradient(circle at 60% 90%, rgba(0,210,255,.10), transparent 55%),
     linear-gradient(180deg, #060611, #02020a 60%, #050510);
-  /* FADE CSS REMOVED */
 }
-
-/* FADE-IN CLASS REMOVED */
 
 /* ========================= */
 /* STICKY NAV (MATCH OTHERS) */
@@ -98,6 +93,7 @@ body {
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
+  margin-left: auto;
 }
 .hamburger span {
   width: 22px;
@@ -120,109 +116,22 @@ body {
 .mobile-nav a.active {
   background: rgba(255,0,0,.18);
 }
-
 .mobile-nav.show { display: block; }
 
 @media (max-width: 900px) {
   .nav { display: none; }
-  .hamburger { display: flex; margin-left: auto; }
-}
-
-/* FIX 1: Adjust nav padding and logo size for very small phones */
-@media (max-width: 480px) {
-  .nav-inner {
-    padding: 10px 12px; /* Reduce padding on narrow screens */
-  }
-  .nav-logo {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-  }
-}
-
-/* ========================= */
-/* HERO                      */
-/* ========================= */
-@keyframes cvrFadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.cvr-hero {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 16px 20px;
-  text-align: center;
-}
-
-.cvr-hero-title {
-  animation: cvrFadeUp .8s ease-out both;
-  font-family: Anton, sans-serif;
-  font-size: clamp(72px, 12vw, 148px);
-  letter-spacing: .035em;
-  margin: 0 0 22px;
-}
-
-.cvr-hero-sub {
-  animation: cvrFadeUp .8s ease-out both;
-  animation-delay: .12s;
-  font-size: 18px;
-}
-
-.cvr-hero-note {
-  animation: cvrFadeUp .8s ease-out both;
-  animation-delay: .22s;
-  font-size: 15px;
-  opacity: .75;
-  margin-bottom: 14px;
-}
-
-.cvr-hero-mail {
-  animation: cvrFadeUp .8s ease-out both;
-  animation-delay: .32s;
-  margin: 8px auto 0;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: #ff1f1f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  color: #fff;
-  text-decoration: none;
-  box-shadow: 0 0 18px rgba(255,0,0,.6);
-}
-
-/* ========================= */
-/* FEATURE CARDS + STREAMS   */
-/* ========================= */
-.cvr-feature-row,
-.streams-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 26px;
-}
-
-/* ========================= */
-/* SOCIAL + FOOTER           */
-/* ========================= */
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
-  gap: 16px;
-}
-
-/* ========================= */
-/* MOBILE (REDUNDANT BUT KEPT FOR CLARITY) */
-/* ========================= */
-@media (max-width: 900px) {
-  .nav { display: none; }
   .hamburger { display: flex; }
-  .mobile-nav.show { display: block; }
-}
 
+  .mobile-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  body { overflow-x: hidden; }
+}
 </style>
 </head>
 
@@ -251,7 +160,7 @@ body {
 
   </div>
 
- <div id="mobileNav" class="mobile-nav">
+  <div id="mobileNav" class="mobile-nav">
     <a class="active" href="/">Home</a>
     <a href="/partners/">Partners</a>
     <a href="/giveaways/">Giveaways</a>
@@ -271,16 +180,82 @@ body {
   <p class="cvr-hero-note">
     For business inquiries, use the email or telegram below! 🖤
   </p>
-  <a
-    href="mailto:cvrsifybusiness@gmail.com"
-    class="cvr-hero-mail"
-    target="_blank"
-    rel="noopener"
-    aria-label="Email Cvrsify"
-  >
-    ✉
-  </a>
+  <a href="mailto:cvrsifybusiness@gmail.com"
+     class="cvr-hero-mail"
+     target="_blank"
+     rel="noopener">✉</a>
 </section>
+
+<style>
+.cvr-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 16px 20px;
+  text-align: center;
+}
+
+.cvr-hero-title {
+  font-family: Anton, sans-serif;
+  font-size: clamp(72px, 12vw, 148px);
+  letter-spacing: .035em;
+  margin: 0 0 22px;
+}
+
+/* HERO MOBILE FIX */
+@media (max-width: 600px) {
+  .cvr-hero-title {
+    font-size: clamp(48px, 14vw, 88px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* ========================= */
+/* EMAIL BUTTON – RESTORED   */
+/* ========================= */
+.cvr-hero-mail {
+  margin-top: 18px;
+
+  /* ✅ FIX: FORCE CENTER ALIGNMENT */
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ff1f1f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #fff;
+  text-decoration: none;
+  box-shadow:
+    0 0 14px rgba(255, 0, 0, 0.55),
+    0 0 28px rgba(255, 0, 0, 0.45),
+    0 0 48px rgba(255, 0, 0, 0.35);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.cvr-hero-mail:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 0 18px rgba(255, 0, 0, 0.75),
+    0 0 38px rgba(255, 0, 0, 0.65),
+    0 0 70px rgba(255, 0, 0, 0.55);
+}
+
+@media (max-width: 600px) {
+  .cvr-hero-mail {
+    margin-top: 22px;
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+}
+</style>
 
 <div class="cvr-feature-section">
   <div class="cvr-feature-row">
@@ -698,7 +673,6 @@ document.querySelectorAll('.cvr-feature-card').forEach(card => {
   0%,100% { box-shadow: 0 0 20px rgba(0,255,94,0.7), 0 0 45px rgba(0,255,94,0.55), 0 0 70px rgba(0,255,94,0.35); }
   50% { box-shadow: 0 0 30px rgba(115,255,170,1), 0 0 70px rgba(115,255,170,0.9), 0 0 110px rgba(115,255,170,0.7); }
 }
-
 /* SOCIAL BUTTONS */
 .social-wrapper { max-width: 1000px; margin: 10px auto 60px; padding: 10px; }
 /* FIX 4: Increased side padding on social wrapper for better mobile look */
