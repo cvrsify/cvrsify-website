@@ -113,7 +113,10 @@ body.loaded { opacity: 1; }
 
 @media (max-width: 900px) {
   .nav { display: none; }
-  .hamburger { display: flex; }
+  .hamburger { 
+    display: flex;
+    justify-self: end; /* ✅ ONLY CHANGE */
+  }
 }
 </style>
 </head>
