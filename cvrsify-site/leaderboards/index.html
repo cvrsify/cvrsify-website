@@ -45,8 +45,8 @@ body.loaded { opacity: 1; }
   max-width: 1400px;
   margin: 0 auto;
   padding: 14px 18px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  position: relative;
+  display: flex;
   align-items: center;
 }
 
@@ -58,8 +58,10 @@ body.loaded { opacity: 1; }
 }
 
 .nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
   gap: 18px;
 }
 
@@ -113,9 +115,9 @@ body.loaded { opacity: 1; }
 
 @media (max-width: 900px) {
   .nav { display: none; }
-  .hamburger { 
+  .hamburger {
     display: flex;
-    justify-self: end; /* ✅ ONLY CHANGE */
+    margin-left: auto;
   }
 }
 </style>
