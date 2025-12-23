@@ -121,7 +121,7 @@ body {
   .hamburger { display: flex; margin-left: auto; }
 }
 
-/* Tab Transition Animations (Only for PackDraw/96 switch) */
+/* Tab Transition Animations (Only for 96 Casino/96 switch) */
 .is-leaving {
   animation: cvrFadeOut .3s ease-in both;
 }
@@ -776,34 +776,14 @@ body {
   "
 >
   <div class="cvr-title-block">
-    <div class="cvr-title-top" id="cvr-title-top">PACKDRAW</div>
+    <div class="cvr-title-top" id="cvr-title-top">96 CASINO</div>
     <div class="cvr-title-bottom" id="cvr-title-bottom">MILESTONES</div>
   </div>
   <div class="cvr-separator"></div>
 
   <div class="cvr-switch-row">
-    <a class="cvr-switch-btn active" data-tab="packdraw">PackDraw</a>
-    <a class="cvr-switch-btn inactive" data-tab="casino96">96</a>
+    <a class="cvr-switch-btn active" data-tab="casino96">96</a>
   </div>
-
-  <a
-    href="https://packdraw.com?ref=cvrsify"
-    target="_blank"
-    class="cvr-info-bar"
-    id="cta-packdraw"
-  >
-    <div class="cvr-info-left">
-      <img
-        src="https://raw.githubusercontent.com/cvrsify/social-images/main/images/0x0-removebg-preview.png"
-        class="cvr-info-icon"
-        alt="PackDraw"
-      />
-      <div>
-        <div class="cvr-info-bold">Use Code "CVRSIFY" on PackDraw</div>
-        <div class="cvr-info-small">Click here to join and gain rewards</div>
-      </div>
-    </div>
-  </a>
 
   <a
     href="https://record.96.partners/_IftnDdVFDHJBNMcqFlyYf2Nd7ZgqdRLk/1/?lp=96trustedbet.com/?channel_id=600069980"
@@ -827,32 +807,10 @@ body {
     </div>
   </a>
 
-  <div class="cvr-promo-box-single">
-    <img 
-      src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/d6a306fa-0883-4662-b5ab-80e0502048e1.png"
-      alt="Cvrsify Bonus Promo"
-    >
+  
   </div>
 
-  <div id="packdraw-section" class="milestone-tab-content">
-    <div class="milestone-header">
-      <div class="milestone-title">Rules</div>
-      <div class="milestone-subtitle">
-        Deposit & Wager on PackDraw using code CVRSIFY and<br>
-        unlock cash rewards as you climb through each tier!<br>
-        Once you hit a milestone, click Claim Reward<br>
-        and our staff will verify your wager in Discord.
-      </div>
-    </div>
-    <div class="milestone-grid" id="packdraw-grid">
-      </div>
-  </div>
-
-  <div
-    id="casino96-section"
-    class="milestone-tab-content"
-    style="display: none"
-  >
+  <div id="casino96-section" class="milestone-tab-content">
     <div class="milestone-header">
       <div class="milestone-title">Rules</div>
       <div class="milestone-subtitle">
@@ -959,9 +917,9 @@ function toggleMenu() {
 /* ======================================= */
 (function () {
   const titleTop = document.getElementById("cvr-title-top");
-  const pdSection = document.getElementById("packdraw-section");
+  const pdSection = document.getElementById("96 Casino-section");
   const c96Section = document.getElementById("casino96-section");
-  const ctaPD = document.getElementById("cta-packdraw");
+  const ctaPD = document.getElementById("cta-96 Casino");
   const cta96 = document.getElementById("cta-96");
 
   const modalOverlay = document.getElementById("milestone-modal");
@@ -1015,17 +973,14 @@ function toggleMenu() {
   }
 
   function renderMilestones() {
-    const pdGrid = document.getElementById("packdraw-grid");
-    const c96Grid = document.getElementById("casino96-grid");
-    if (pdGrid) {
-      pdGrid.innerHTML = "";
-      MILESTONES.forEach((m) => pdGrid.appendChild(createMilestoneCard(m, "packdraw")));
-    }
-    if (c96Grid) {
-      c96Grid.innerHTML = "";
-      MILESTONES.forEach((m) => c96Grid.appendChild(createMilestoneCard(m, "casino96")));
-    }
-  }
+  const c96Grid = document.getElementById("casino96-grid");
+  if (!c96Grid) return;
+
+  c96Grid.innerHTML = "";
+  MILESTONES.forEach((m) =>
+    c96Grid.appendChild(createMilestoneCard(m, "casino96"))
+  );
+}
 
   // Call render once on load
   renderMilestones();
@@ -1043,9 +998,9 @@ function toggleMenu() {
     modalReward.textContent = reward;
     modalTierLabel.textContent = `Tier ${tier}`;
 
-    if (site === "packdraw") {
-      modalTerm1El.innerHTML = "You're using code CVRSIFY on PackDraw when Depositing & Wagering (this is required to qualify).";
-      modalTerm2El.innerHTML = "You've wagered at least the milestone amount shown above on PackDraw.";
+    if (site === "96 Casino") {
+      modalTerm1El.innerHTML = "You're using code CVRSIFY on 96 Casino when Depositing & Wagering (this is required to qualify).";
+      modalTerm2El.innerHTML = "You've wagered at least the milestone amount shown above on 96 Casino.";
     } else {
       modalTerm1El.innerHTML = "You're signed up using my 96 Casino link while Deposting & Wagering (this is required to qualify).";
       modalTerm2El.innerHTML = "You've wagered at least the milestone amount shown above on 96 Casino.";
@@ -1108,10 +1063,10 @@ function toggleMenu() {
         if (btn.classList.contains("active")) return;
 
         const tab = btn.dataset.tab;
-        let sectionToHide = tab === "packdraw" ? c96Section : pdSection;
-        let sectionToShow = tab === "packdraw" ? pdSection : c96Section;
-        let ctaToHide = tab === "packdraw" ? cta96 : ctaPD;
-        let ctaToShow = tab === "packdraw" ? ctaPD : cta96;
+        let sectionToHide = tab === "96 Casino" ? c96Section : pdSection;
+        let sectionToShow = tab === "96 Casino" ? pdSection : c96Section;
+        let ctaToHide = tab === "96 Casino" ? cta96 : ctaPD;
+        let ctaToShow = tab === "96 Casino" ? ctaPD : cta96;
 
         // 1. Update Buttons
         buttons.forEach((b) => {
@@ -1123,7 +1078,7 @@ function toggleMenu() {
 
         // 2. Update Title
         if (titleTop) {
-          titleTop.textContent = tab === "packdraw" ? "PACKDRAW" : "96 CASINO";
+          titleTop.textContent = tab === "96 Casino" ? "96 Casino" : "96 CASINO";
         }
 
         // 3. Update CTAs (Need to hide/show within the delay window, so keep this direct)
