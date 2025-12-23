@@ -132,10 +132,10 @@
     }
     .nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
     .nav a.active {
-      opacity: 1;
-      background: rgba(255,0,0,.18);
-      box-shadow: 0 0 14px rgba(255,0,0,.25);
-    }
+  opacity: 1;
+  background: rgba(255,0,0,.18);
+  box-shadow: 0 0 14px rgba(255,0,0,.25);
+}
 
     /* Mobile */
     .hamburger {
@@ -169,8 +169,8 @@
       font-weight: 700;
     }
     .mobile-nav a.active {
-      background: rgba(255,0,0,.18);
-    }
+  background: rgba(255,0,0,.18);
+}
 
     .mobile-nav.show { display: block; }
 
@@ -577,13 +577,14 @@
       alt="Cvrsify">
 
     <nav class="nav">
-      <a href="/">Home</a>
-  <a href="/partners">Partners</a>
-  <a href="/leaderboards">Leaderboards</a>
-  <a href="/milestones">Milestones</a>
-  <a href="/shop">Shop</a>
-  <a href="/about">About Me</a>
-    </nav>
+<a href="/">Home</a>
+<a href="/partners">Partners</a>
+<a href="/giveaways" class="active">Giveaways</a>
+<a href="/leaderboards">Leaderboards</a>
+<a href="/milestones">Milestones</a>
+<a href="/shop">Shop</a>
+<a href="/about">About Me</a>
+</nav>
 
     <div class="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -594,6 +595,7 @@
   <div class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
       <a href="/">Home</a>
       <a href="/partners">Partners</a>
+      <a href="/giveaways" class="active">Giveaways</a>
       <a href="/leaderboards">Leaderboards</a>
       <a href="/milestones">Milestones</a>
       <a href="/shop">Shop</a>
@@ -832,6 +834,5 @@
     });
 
   </script>
-
 </body>
 </html>
