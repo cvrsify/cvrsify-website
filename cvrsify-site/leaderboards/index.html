@@ -737,6 +737,13 @@ function maskName(name) {
   if (name.length <= 3) return name + "***";
   return name.slice(0,3) + "*".repeat(Math.max(1,name.length - 3));
 }
+
+
+function mask96Id(id) {
+  const s = String(id);
+  if (s.length <= 6) return s;
+  return s.slice(0,3) + "*".repeat(s.length - 6) + s.slice(-3);
+}
 function prizeLabel(rank) {
   if (rank >= 1 && rank <= PAYOUTS.length) {
     return {
@@ -857,16 +864,16 @@ async function loadPackdrawLeaderboard() {
    96 CASINO MANUAL LEADERBOARD
    ========================= */
 const LEADERBOARD_96 = [
-  { name:"PlayerOne",  wager:1500.42, prize:40 },
-  { name:"NightFox",   wager:1200.11, prize:25 },
-  { name:"CryptoKid",  wager:900.88,  prize:20 },
-  { name:"ZenWave",    wager:750.55,  prize:10 },
-  { name:"StormRush",  wager:600.33,  prize:5  },
-  { name:"WagerWolf",  wager:520.22,  prize:0  },
-  { name:"LuckyAce",   wager:480.77,  prize:0  },
-  { name:"TiltProof",  wager:430.19,  prize:0  },
-  { name:"MysticSpin", wager:390.61,  prize:0  },
-  { name:"RedPhantom", wager:360.44,  prize:0  }
+  { name:"6011304975", wager:973.93, prize:40 },
+  { name:"6011251099", wager:152.80, prize:25 },
+  { name:"6011386217", wager:67.00,  prize:20 },
+  { name:"6011270146", wager:25.18,  prize:10 },
+  { name:"6011265117", wager:23.40,  prize:5  },
+  { name:"6011383662", wager:22.70,  prize:0  },
+  { name:"6011270203", wager:18.89,  prize:0  },
+  { name:"6011265209", wager:15.00,  prize:0  },
+  { name:"6011270529", wager:12.35,  prize:0  },
+  { name:"6011265213", wager:5.00,   prize:0  }
 ];
 
 function render96Podium(players) {
@@ -886,15 +893,15 @@ function render96Podium(players) {
   const p2 = document.querySelector(".cvr96-prize-2");
   const p3 = document.querySelector(".cvr96-prize-3");
 
-  if (u1 && first)  u1.textContent = maskName(first.name);
+  if (u1 && first)  u1.textContent = mask96Id(first.name);
   if (w1 && first)  w1.textContent = `${formatMoney(first.wager)} WAGERED`;
   if (p1 && first)  p1.textContent = formatMoney(first.prize);
 
-  if (u2 && second) u2.textContent = maskName(second.name);
+  if (u2 && second) u2.textContent = mask96Id(second.name);
   if (w2 && second) w2.textContent = `${formatMoney(second.wager)} WAGERED`;
   if (p2 && second) p2.textContent = formatMoney(second.prize);
 
-  if (u3 && third)  u3.textContent = maskName(third.name);
+  if (u3 && third)  u3.textContent = mask96Id(third.name);
   if (w3 && third)  w3.textContent = `${formatMoney(third.wager)} WAGERED`;
   if (p3 && third)  p3.textContent = formatMoney(third.prize);
 }
@@ -915,7 +922,7 @@ function render96TopList(players) {
         <div class="cvr-icon-wrap">
           <img src="https://raw.githubusercontent.com/cvrsify/social-images/refs/heads/main/images/0x0.png" alt="">
         </div>
-        <div class="cvr-username">${maskName(p.name)}</div>
+        <div class="cvr-username">${mask96Id(p.name)}</div>
       </div>
       <div class="cvr-row-wager">${formatMoney(p.wager)}</div>
       <div class="cvr-row-prize">${formatMoney(p.prize)}</div>
