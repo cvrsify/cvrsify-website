@@ -208,6 +208,27 @@ body.loaded { opacity: 1; }
   .cvr-title-top { font-size:30px; }
   .cvr-title-bottom { font-size:44px; }
 }
+/* CTA SUB TITLE (MATCH HERO STYLE, SMALLER) */
+.cvr-cta-subtitle {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ff4500 0%, #b82000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 8px rgba(255,69,0,0.45),
+    0 0 14px rgba(255,69,0,0.25);
+}
+
+@media (max-width:600px) {
+  .cvr-cta-subtitle {
+    font-size: 18px;
+  }
+}
 .cvr-separator {
   width:200px;
   height:2px;
@@ -513,7 +534,7 @@ body.loaded { opacity: 1; }
             </div>
           </div>
         </a>
-
+        <div class="cvr-cta-subtitle">$200 Monthly Leaderboard</div>
         <div class="cvr-timer-box">
           <div class="cvr-timer-title">Leaderboard Ends In</div>
           <div id="cvr-countdown" class="cvr-countdown">00D : 00H : 00M : 00S</div>
@@ -582,7 +603,7 @@ body.loaded { opacity: 1; }
             </div>
           </div>
         </a>
-
+        <div class="cvr-cta-subtitle">$200 Monthly Leaderboard</div>
         <div class="cvr-timer-box">
           <div class="cvr-timer-title">Leaderboard Ends In</div>
           <div id="cvr-countdown-96" class="cvr-countdown">00D : 00H : 00M : 00S</div>
@@ -714,7 +735,7 @@ updateCountdown();
    PACKDRAW LEADERBOARD CONFIG
    ========================= */
 const PACKDRAW_WORKER_URL = "https://packdraw.im-trixzies.workers.dev";
-const PAYOUTS = [40, 25, 20, 10, 5];
+const PAYOUTS = [80, 50, 30, 20, 20];
 
 function getMonthlyAfterEST() {
   const now = new Date();
@@ -864,16 +885,16 @@ async function loadPackdrawLeaderboard() {
    96 CASINO MANUAL LEADERBOARD
    ========================= */
 const LEADERBOARD_96 = [
-  { name:"6011304975", wager:973.93, prize:40 },
-  { name:"6011383662", wager:254.15, prize:25 },
-  { name:"6011251099", wager:152.80, prize:20 },
-  { name:"6011360692", wager:88.00,  prize:10 },
-  { name:"6011386217", wager:67.00,  prize:5  },
-  { name:"6011270146", wager:25.18,  prize:0  },
-  { name:"6011265117", wager:23.40,  prize:0  },
-  { name:"6011270203", wager:18.89,  prize:0  },
-  { name:"6011265209", wager:15.00,  prize:0  },
-  { name:"6011270529", wager:12.35,  prize:0  }
+  { name:"0000000000", wager:NaN,    prize:80 },
+  { name:"0000000000", wager:NaN,    prize:40 },
+  { name:"0000000000", wager:NaN,    prize:30 },
+  { name:"0000000000", wager:NaN,    prize:20 },
+  { name:"0000000000", wager:NaN,    prize:20 },
+  { name:"0000000000", wager:NaN,    prize:0  },
+  { name:"0000000000", wager:NaN,    prize:0  },
+  { name:"0000000000", wager:NaN,    prize:0  },
+  { name:"0000000000", wager:NaN,    prize:0  },
+  { name:"0000000000", wager:NaN,    prize:0  }
 ];
 
 function render96Podium(players) {
